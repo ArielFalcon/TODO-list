@@ -1,27 +1,72 @@
-# TODOList
+# TODO-list App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
+## Descripción
 
-## Development server
+La aplicación **TODO-list** es una herramienta diseñada para gestionar tareas y recordatorios de manera sencilla. Su principal objetivo es mostrar mis conocimientos y habilidades como desarrollador Frontend.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologías Utilizadas
 
-## Code scaffolding
+- **Frontend:**
+  - [Angular 18](https://angular.io/) - Un marco de trabajo para construir aplicaciones web.
+  - [TypeScript](https://www.typescriptlang.org/) - Un superconjunto de JavaScript que agrega tipos estáticos.
+  - [ECMAScript 6+](https://www.ecma-international.org/ecma-262/6.0/) - La última versión de JavaScript que proporciona nuevas características y mejoras.
+  - [Angular Material](https://material.angular.io/) - Un conjunto de componentes UI que siguen las directrices de Material Design.
+  - [SCSS](https://sass-lang.com/) - Un preprocesador CSS que permite un estilo más limpio y estructurado.
+  - [RxJS](https://rxjs.dev/) - Una biblioteca para programación reactiva que permite gestionar eventos asincrónicos.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Backend:**
+  - [Node.js 22](https://nodejs.org/) - Un entorno de ejecución de JavaScript del lado del servidor.
+  - [Firebase](https://firebase.google.com/) - Plataforma de Google que proporciona bases de datos en tiempo real, autenticación y hosting.
 
-## Build
+## Características
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Gestión de Tareas:** Visualizar, crear, editar y eliminar tareas.
+- **Interfaz Amigable:** Utiliza Angular Material para una experiencia de usuario atractiva.
+- **Autenticación:** Permite a los usuarios registrarse y acceder a sus tareas de forma segura.
+- **Sincronización en Tiempo Real:** Los cambios se reflejan instantáneamente gracias a Firebase.
+- **Responsive Design:** Accesible desde dispositivos móviles y de escritorio.
 
-## Running unit tests
+## Instalación
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para ejecutar la aplicación localmente, sigue estos pasos:
 
-## Running end-to-end tests
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/ArielFalcon/TODO-list.git
+   cd TODO-list
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. **Instala las dependencias:**
+   ```bash
+   npm install
+   ```
 
-## Further help
+3. **Configura Firebase:**
+   - Crea un proyecto en [Firebase Console](https://console.firebase.google.com/).
+   - Añade tu configuración de Firebase en el archivo `src/environments/environment.ts`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+4. **Ejecuta la aplicación:**
+   ```bash
+   ng serve
+   ```
+
+5. Abre tu navegador y accede a `http://localhost:4200`# Verifica el puerto, puede variar.
+
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue estos pasos:
+
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
+3. Realiza tus cambios y haz un commit (`git commit -m 'Añadir nueva característica'`).
+4. Haz un push a la rama (`git push origin feature/nueva-caracteristica`).
+5. Abre un pull request.
+
+## Licencia
+
+Este proyecto está bajo la [MIT License](LICENSE).
+
+## Contacto
+
+Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de [falconyumn@gmail.com](mailto:tu-email@ejemplo.com).
