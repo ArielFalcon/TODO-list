@@ -18,4 +18,5 @@ export enum ETaskTableColumns {
 	TITLE = 'title',
 	DEADLINE = 'deadline',
 	STATE = 'state',
+	ACTION = 'action',
 }

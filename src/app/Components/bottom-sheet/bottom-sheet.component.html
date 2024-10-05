@@ -1,0 +1,7 @@
+<mat-nav-list>
+	@for (el of data.actions; track $index) {
+		<a mat-list-item (click)="handleClick($event, data.element.id)" class="data-item">
+			<span matListItemTitle>{{el.title}}</span>
+		</a>
+	}
+</mat-nav-list>

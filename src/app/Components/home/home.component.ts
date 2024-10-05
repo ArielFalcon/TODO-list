@@ -1,7 +1,13 @@
-import {Component, signal, WritableSignal} from '@angular/core';
+import {Component, inject, signal, WritableSignal} from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {EState, ETaskTableColumns, ITask} from "@/Models/tasks.model";
 import {DatePipe} from "@angular/common";
+import {MatBottomSheet, MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatListItem, MatNavList} from "@angular/material/list";
+import {MatLine} from "@angular/material/core";
+import {BottomSheetComponent} from "@/Components/bottom-sheet/bottom-sheet.component";
+import {MatButton, MatMiniFabButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
 
 const ELEMENT_DATA: ITask[] = [
   {id: '1', priority: 4, title: 'Task 1', description: 'Description 1', deadline: new Date(), state: EState.PENDANT},
@@ -14,7 +20,14 @@ const ELEMENT_DATA: ITask[] = [
   standalone: true,
   imports: [
     MatTableModule,
-    DatePipe
+    DatePipe,
+    MatBottomSheetModule,
+    MatNavList,
+    MatListItem,
+    MatLine,
+    MatButton,
+    MatMiniFabButton,
+    MatIcon,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -22,12 +35,30 @@ const ELEMENT_DATA: ITask[] = [
 export class HomeComponent {
   constructor() {}
   
-  displayedColumns: ETaskTableColumns[] = [ETaskTableColumns.PRIORITY, ETaskTableColumns.TITLE, ETaskTableColumns.DEADLINE, ETaskTableColumns.STATE];
+  displayedColumns: ETaskTableColumns[] = [ETaskTableColumns.PRIORITY, ETaskTableColumns.TITLE, ETaskTableColumns.DEADLINE, ETaskTableColumns.STATE, ETaskTableColumns.ACTION];
   dataSource: ITask[] = ELEMENT_DATA;
   selectedTask: WritableSignal <ITask|null> = signal(null);
+  private _bottomSheet = inject(MatBottomSheet);
   
-  onClickRow(row: any) {
-    console.log(row)
+  onClickRow(row: ITask): void {
     this.selectedTask.set(row)
+  }
+  
+  openBottomSheet(element: ITask, $event: MouseEvent): void {
+    $event.stopPropagation();
+    console.log('Open bottom sheet: ', element);
+    this._bottomSheet.open(BottomSheetComponent, {
+      data: {
+        actions: [
+          {
+          title: 'Borrar',
+          },
+          {
+            title: 'Editar',
+          }
+        ],
+        element,
+      }
+    });
   }
 }

@@ -1,0 +1,8 @@
+.data-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=bottom-sheet.component.css.map */
