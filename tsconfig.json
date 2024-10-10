@@ -5,12 +5,16 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/app/*"],
+      "@/*": [
+        "src/app/*"
+      ],
+      "@components/*": [
+        "src/app/components"
+      ],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
