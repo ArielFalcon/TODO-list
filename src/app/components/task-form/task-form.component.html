@@ -1,0 +1,40 @@
+<form [formGroup]="taskForm" class="task-form">
+	<mat-form-field>
+		<mat-label>Título</mat-label>
+		<input matInput formControlName="title" placeholder="¿Qué quieres hacer?">
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Descripción</mat-label>
+		<textarea matInput formControlName="description" placeholder="Cuentame más"></textarea>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Fecha Límite</mat-label>
+		<input matInput [matDatepicker]="picker" formControlName="deadline" placeholder="¿Hasta cuando tienes?">
+		<mat-hint>dd-mm-yyyy</mat-hint>
+		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+		<mat-datepicker #picker></mat-datepicker>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Hora Límite</mat-label>
+		<input type="time" matInput formControlName =timeLimit>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Estado</mat-label>
+		<mat-select formControlName="state">
+		@for (state of taskState; track $index) {
+			<mat-option [value]="state">{{state}}</mat-option>
+		}
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Prioridad</mat-label>
+		<mat-select formControlName="priority">
+		@for (priority of [1,2,3,4,5]; track $index) {
+			<mat-option [value]="priority">Nivel {{priority}}</mat-option>
+		}
+		</mat-select>
+	</mat-form-field>
+	
+	<button class="submit-btn" mat-raised-button [disabled]="taskForm.invalid" (click)="onSubmit()">Guardar</button>
+</form>
+
