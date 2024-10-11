@@ -1,9 +1,11 @@
+import { Timestamp } from 'firebase/firestore';
+
 export interface ITask {
-	id: string;
+	id?: string;
 	priority: number;
 	title: string;
 	description: string;
-	deadline: Date;
+	deadline: Timestamp;
 	state: EState;
 }
 

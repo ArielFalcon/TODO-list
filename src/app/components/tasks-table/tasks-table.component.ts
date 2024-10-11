@@ -1,19 +1,15 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { EState, ETaskTableColumns, ITask } from "@/Models/tasks.model";
-import { DatePipe } from "@angular/common";
+import { ETaskTableColumns, ITask } from "@/models/tasks.model";
+import {AsyncPipe, DatePipe} from "@angular/common";
 import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListItem, MatNavList } from "@angular/material/list";
 import { MatLine } from "@angular/material/core";
-import { BottomSheetComponent } from "@/Components/bottom-sheet/bottom-sheet.component";
+import { BottomSheetComponent } from "../bottom-sheet/bottom-sheet.component";
 import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
-
-const ELEMENT_DATA: ITask[] = [
-  { id: '1', priority: 4, title: 'Task 1', description: 'Description 1', deadline: new Date(), state: EState.PENDANT },
-  { id: '2', priority: 1, title: 'Task 2', description: 'Description 2', deadline: new Date(), state: EState.IN_PROGRESS },
-  { id: '3', priority: 2, title: 'Task 3', description: 'Description 3', deadline: new Date(), state: EState.DONE },
-];
+import {Observable} from "rxjs";
+import {TasksCrudService} from "@/services/tasks-crud.service";
 
 @Component({
   selector: 'app-task-table',
@@ -28,17 +24,29 @@ const ELEMENT_DATA: ITask[] = [
     MatButton,
     MatMiniFabButton,
     MatIcon,
+    AsyncPipe,
   ],
   templateUrl: './tasks-table.component.html',
   styleUrl: './tasks-table.component.scss'
 })
-export class TaskTableComponent {
-  constructor() { }
+export class TaskTableComponent implements OnInit{
+  constructor(private tasksCrud:TasksCrudService){}
+  tasks$ !: Observable<ITask[]>
 
   displayedColumns: ETaskTableColumns[] = [ETaskTableColumns.PRIORITY, ETaskTableColumns.TITLE, ETaskTableColumns.DEADLINE, ETaskTableColumns.STATE, ETaskTableColumns.ACTION];
-  dataSource: ITask[] = ELEMENT_DATA;
+  dataSource !: ITask[]
   selectedTask: WritableSignal<ITask | null> = signal(null);
   private _bottomSheet = inject(MatBottomSheet);
+  
+  ngOnInit(): void {
+    this.tasks$ = this.tasksCrud.getCollectionData()
+    this.tasks$.subscribe(
+      (tasks: ITask[]) => {
+        console.log(tasks)
+        this.dataSource = tasks
+      }
+    )
+  }
 
   onClickRow(row: ITask): void {
     this.selectedTask.set(row)
