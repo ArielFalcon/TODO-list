@@ -1,2 +1,9 @@
-<app-task-table></app-task-table>
+@defer (on immediate ) {
+	<app-task-table></app-task-table>
+} @loading (minimum 500ms) {
+	<app-loader></app-loader>
+} @error {
+	<p>Error</p>
+}
+
 <app-task-form></app-task-form>
