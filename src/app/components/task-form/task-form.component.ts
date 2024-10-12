@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {TasksCrudService} from "@/services/tasks-crud.service";
-import {EState, ITask} from "@/models/tasks.model";
+import {EState, ITaskDTO} from "@/models/tasks.model";
 import {MatButton} from "@angular/material/button";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
@@ -62,7 +62,7 @@ export class TaskFormComponent implements OnInit{
 		return new Date(`${day}T${time}`)
 	}
 	
-	get taskDTO(): ITask {
+	get taskDTO(): ITaskDTO {
 		return {
 			title: this.taskForm.get('title')?.value,
 			description: this.taskForm.get('description')?.value,
@@ -73,7 +73,6 @@ export class TaskFormComponent implements OnInit{
 	}
   
   onSubmit() {
-	  console.log(this.taskDTO)
     this.tasksCrud.addTask(this.taskDTO).subscribe(
       (res) => {
         console.log(res);

@@ -1,12 +1,15 @@
 import { Timestamp } from 'firebase/firestore';
 
-export interface ITask {
-	id?: string;
-	priority: number;
+export interface ITaskDTO {
 	title: string;
 	description: string;
+	priority: number;
 	deadline: Timestamp;
 	state: EState;
+}
+
+export interface ITask extends ITaskDTO {
+	id: string;
 }
 
 export enum EState {

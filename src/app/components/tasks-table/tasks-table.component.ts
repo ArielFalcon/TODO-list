@@ -42,7 +42,6 @@ export class TaskTableComponent implements OnInit{
     this.tasks$ = this.tasksCrud.getCollectionData()
     this.tasks$.subscribe(
       (tasks: ITask[]) => {
-        console.log(tasks)
         this.dataSource = tasks
       }
     )
@@ -54,12 +53,14 @@ export class TaskTableComponent implements OnInit{
 
   openBottomSheet(element: ITask, $event: MouseEvent): void {
     $event.stopPropagation();
-    console.log('Open bottom sheet: ', element);
     this._bottomSheet.open(BottomSheetComponent, {
       data: {
         actions: [
           {
             title: 'Borrar',
+            handler: () => {
+              this.tasksCrud.deleteTask(element.id)
+            }
           },
           {
             title: 'Editar',
