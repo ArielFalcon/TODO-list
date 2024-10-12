@@ -1,0 +1,15 @@
+<div class="days-wrapper">
+	@for (day of daysOfTheWeek; track $index) {
+		<div class="day">
+			
+			@if (isToday(day)) {
+				<p class="selected-day">{{ day }}</p>
+				<mat-spinner mode="determinate" [diameter]="spinnerDiameter" [value]="progressPercentage"
+				             class="progress-spinner"></mat-spinner>
+			} @else {
+				<p>{{ day }}</p>
+			}
+			<p class="day-number">10</p>
+		</div>
+	}
+</div>

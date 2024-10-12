@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
-import { TaskTableComponent } from "../tasks-table/tasks-table.component";
+import {TaskTableComponent} from "@/components/tasks-table/tasks-table.component";
 import {TaskFormComponent} from "@/components/task-form/task-form.component";
 import {LoaderComponent} from "@/components/loader/loader.component";
+import {DaysOfTheWeek} from "@/components/days-of-the-week/days-of-the-week";
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,8 @@ import {LoaderComponent} from "@/components/loader/loader.component";
 	imports: [
 		TaskTableComponent,
 		TaskFormComponent,
-		LoaderComponent
+		LoaderComponent,
+		DaysOfTheWeek
 	],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
