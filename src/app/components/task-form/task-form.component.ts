@@ -75,10 +75,12 @@ export class TaskFormComponent implements OnInit{
   
   onSubmit() {
     this.tasksCrud.addTask(this.taskDTO).subscribe(
-      (res) => {
+      () => {
         this.alertService.showAlert('Tarea añadida')
-	      console.log(res)
-      }
+      },
+	      (error: Error) => {
+					this.alertService.showAlert(error.message)
+			}
     )
   }
 }
