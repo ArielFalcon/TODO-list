@@ -2,13 +2,13 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 export enum EDays {
+	Sunday = "Domingo",
 	Monday = "Lunes",
 	Tuesday = "Martes",
 	Wednesday = "Miércoles",
 	Thursday = "Jueves",
 	Friday = "Viernes",
 	Saturday = "Sábado",
-	Sunday = "Domingo"
 }
 
 @Component({
