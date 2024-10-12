@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+}
+
+.alert-snackbar, .alert-btn {
+  color: #3C343B;
+}
+
+/*# sourceMappingURL=alert.component.css.map */

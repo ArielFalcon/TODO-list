@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import moment from "moment";
 import {Timestamp} from "firebase/firestore";
+import {ShowAlertService} from "@/services/show-alert.service";
 
 
 @Component({
@@ -37,11 +38,11 @@ export class TaskFormComponent implements OnInit{
   readonly taskState = Object.values(EState);
 	private tasksCrud = inject(TasksCrudService);
 	private formBuilder = inject(FormBuilder);
+	private alertService = inject(ShowAlertService);
 
   constructor(){}
   
   ngOnInit(): void {
-    console.log(this.taskState)
     this.taskForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       description: [''],
@@ -75,7 +76,8 @@ export class TaskFormComponent implements OnInit{
   onSubmit() {
     this.tasksCrud.addTask(this.taskDTO).subscribe(
       (res) => {
-        console.log(res);
+        this.alertService.showAlert('Tarea añadida')
+	      console.log(res)
       }
     )
   }

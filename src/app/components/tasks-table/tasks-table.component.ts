@@ -59,7 +59,7 @@ export class TaskTableComponent implements OnInit{
           {
             title: 'Borrar',
             handler: () => {
-              this.tasksCrud.deleteTask(element.id)
+              return this.tasksCrud.deleteTask(element.id)
             }
           },
           {

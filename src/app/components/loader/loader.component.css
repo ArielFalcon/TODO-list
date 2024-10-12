@@ -1,0 +1,9 @@
+.loader-wrapper {
+  z-index: 9999;
+  margin: 10px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 24px 24px;
+}
+
+/*# sourceMappingURL=loader.component.css.map */
