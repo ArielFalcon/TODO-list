@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {TasksCrudService} from "@/services/tasks-crud.service";
 import {EState, ITaskDTO} from "@/models/tasks.model";
 import {MatButton} from "@angular/material/button";
@@ -39,6 +39,7 @@ export class TaskFormComponent implements OnInit{
 	private tasksCrud = inject(TasksCrudService);
 	private formBuilder = inject(FormBuilder);
 	private alertService = inject(ShowAlertService);
+	@Output() _closed = new EventEmitter<boolean>();
 
   constructor(){}
   
@@ -76,7 +77,9 @@ export class TaskFormComponent implements OnInit{
   onSubmit() {
     this.tasksCrud.addTask(this.taskDTO).subscribe(
       () => {
-        this.alertService.showAlert('Tarea añadida')
+	      this.alertService.showAlert('Tarea añadida');
+	      this.taskForm.reset();
+	      this._closed.emit(true);
       },
 	      (error: Error) => {
 					this.alertService.showAlert(error.message)

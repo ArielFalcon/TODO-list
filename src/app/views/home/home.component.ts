@@ -17,6 +17,12 @@ import {DaysOfTheWeek} from "@/components/days-of-the-week/days-of-the-week";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+	showAddTaaskForm: boolean = false;
+	
   constructor() { }
+	
+	toggleAddTaskForm() {
+		this.showAddTaaskForm = !this.showAddTaaskForm;
+	}
 
 }
