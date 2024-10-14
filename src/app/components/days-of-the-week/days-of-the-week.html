@@ -3,7 +3,7 @@
 		@let dayDigit = getDaysOfTheWeekDigits()[$index] ;
 			@if (isToday(day)) {
 				
-				<div class="day selected-day" (click)="onClick(day)">
+				<div class="day selected-day" (click)="onClick(day, dayDigit)">
 					<p>{{ day }}</p>
 					<mat-spinner mode="determinate" strokeWidth="4" [diameter]="spinnerDiameter" [value]="progressPercentage"
 					             class="progress-spinner">
@@ -12,7 +12,7 @@
 				</div>
 			} @else {
 				
-				<div class="day" (click)="onClick(day)">
+				<div class="day" (click)="onClick(day, dayDigit)">
 					<p>{{ day }}</p>
 					<p class="day-number">{{ dayDigit }}</p>
 				</div>

@@ -2,16 +2,9 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnIn
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {WindowRefService} from "@/services/window-ref.service";
 import {debounceTime, Subscription} from "rxjs";
+import {EDayDTO, EDays} from "@/models/days.model";
 
-export enum EDays {
-	Sunday = "Domingo",
-	Monday = "Lunes",
-	Tuesday = "Martes",
-	Wednesday = "Miércoles",
-	Thursday = "Jueves",
-	Friday = "Viernes",
-	Saturday = "Sábado",
-}
+
 
 @Component({
 	selector: 'app-days-of-the-week',
@@ -30,7 +23,7 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	resizeSubscription!: Subscription;
 	
 	@Input() progressPercentage: number = 90;
-	@Output() dayClicked = new EventEmitter<EDays>();
+	@Output() dayClicked = new EventEmitter<EDayDTO>();
 	
 	constructor(
 		private readonly windowRef: WindowRefService,
@@ -88,9 +81,12 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 		return this.progressPercentage === 100;
 	}
 	
-	onClick(day: EDays): void {
-		console.log(`Clicked on ${day}`);
-		this.dayClicked.emit(day);
+	onClick(day: EDays, date: number): void {
+		console.log(`Clicked on ${day}, ${date}`);
+		this.dayClicked.emit({
+			day,
+			date,
+		});
 	}
 	
 	setSpinnerDiameter() {
