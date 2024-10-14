@@ -35,6 +35,12 @@
     *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+<p class="add-task-row" (click)="onAddTaskClick()">
+	Nueva tarea
+	<mat-icon>add</mat-icon>
+</p>
+
+
 @if (selectedTaskValue) {
 <h1>{{selectedTaskValue.title}}</h1>
 <p>{{selectedTaskValue.description}}</p>

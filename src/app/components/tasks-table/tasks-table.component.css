@@ -10,11 +10,25 @@
 
 .mat-mdc-row:hover .mat-mdc-cell {
   border-color: currentColor;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .demo-row-is-clicked {
   font-weight: bold;
+}
+
+.add-task-row {
+  display: flex;
+  place-content: center;
+  width: 99vw;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0 0 24px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.add-task-row:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #FFF;
 }
 
 /*# sourceMappingURL=tasks-table.component.css.map */

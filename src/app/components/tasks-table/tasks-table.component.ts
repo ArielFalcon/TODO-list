@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, EventEmitter, inject, OnInit, Output, signal, WritableSignal} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ETaskTableColumns, ITask } from "@/models/tasks.model";
 import {AsyncPipe, DatePipe} from "@angular/common";
@@ -30,13 +30,14 @@ import {TasksCrudService} from "@/services/tasks-crud.service";
   styleUrl: './tasks-table.component.scss'
 })
 export class TaskTableComponent implements OnInit{
-  constructor(private tasksCrud:TasksCrudService){}
   tasks$ !: Observable<ITask[]>
-
   displayedColumns: ETaskTableColumns[] = [ETaskTableColumns.PRIORITY, ETaskTableColumns.TITLE, ETaskTableColumns.DEADLINE, ETaskTableColumns.STATE, ETaskTableColumns.ACTION];
   dataSource !: ITask[]
   selectedTask: WritableSignal<ITask | null> = signal(null);
   private _bottomSheet = inject(MatBottomSheet);
+  @Output() _addTask = new EventEmitter<boolean>();
+  
+  constructor(private tasksCrud:TasksCrudService){}
   
   ngOnInit(): void {
     this.tasks$ = this.tasksCrud.getCollectionData()
@@ -49,6 +50,10 @@ export class TaskTableComponent implements OnInit{
 
   onClickRow(row: ITask): void {
     this.selectedTask.set(row)
+  }
+  
+  onAddTaskClick(): void {
+    this._addTask.emit(true)
   }
 
   openBottomSheet(element: ITask, $event: MouseEvent): void {

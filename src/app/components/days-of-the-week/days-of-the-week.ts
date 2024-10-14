@@ -23,7 +23,7 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	resizeSubscription!: Subscription;
 	
 	@Input() progressPercentage: number = 90;
-	@Output() dayClicked = new EventEmitter<EDayDTO>();
+	@Output() _dayClicked = new EventEmitter<EDayDTO>();
 	
 	constructor(
 		private readonly windowRef: WindowRefService,
@@ -83,7 +83,7 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	
 	onClick(day: EDays, date: number): void {
 		console.log(`Clicked on ${day}, ${date}`);
-		this.dayClicked.emit({
+		this._dayClicked.emit({
 			day,
 			date,
 		});
