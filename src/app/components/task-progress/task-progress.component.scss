@@ -1,0 +1,113 @@
+body {
+  font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+  color: #404040;
+  background: #2a2a2a;
+}
+
+.container {
+  margin: 60px auto;
+  width: 400px;
+  text-align: center;
+
+  .progress {
+    margin: 0 auto;
+    width: clamp(380px, 20vw, 500px);
+    position: relative;
+    height: 60px;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 24px 0 0 24px;
+      transition: 0.4s linear;
+      background-color: #FFB3B3;
+
+      &.color-step-1 {
+        background-color: #FF7F7F;
+      }
+
+      &.color-step-2 {
+        background-color: #FF9999;
+      }
+
+      &.color-step-3 {
+        background-color: #B3E2A7;
+      }
+
+      &.color-step-4 {
+        background-color: #9DDE8B;
+      }
+
+      &.color-step-5 {
+        background-color: #40A578;
+
+        &>.task-progress {
+          color: #FFF;
+          mix-blend-mode: normal;
+        }
+      }
+
+      &.color-full {
+        background-color: #006769;
+        border-radius: 24px;
+
+        &>.task-progress {
+          color: #FFF;
+          mix-blend-mode: normal;
+        }
+      }
+    }
+
+    .task-progress {
+      position: absolute;
+      font-weight: bold;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      margin-top: -10px;
+      color: white;
+      text-shadow: 0 1px black;
+      mix-blend-mode: difference;
+      transition: all 0.4s linear;
+    }
+
+    .control-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: transparent;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      z-index: 9999;
+      transition: all 0.3s linear;
+
+      &.decrement:disabled, &.increment:disabled {
+        pointer-events: none;
+        opacity: 0.1;
+        color: #3C343B;
+        background-color: #ccc;
+      }
+
+      &.increment {
+        right: 5%;
+
+        &:hover {
+          background-color: #40A578;
+        }
+      }
+
+      &.decrement {
+        left: 5%;
+
+        &:hover {
+          background-color: #FFAD60;
+        }
+      }
+    }
+  }
+}

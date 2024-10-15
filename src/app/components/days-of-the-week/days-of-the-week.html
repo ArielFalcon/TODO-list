@@ -1,25 +1,23 @@
 <div class="days-wrapper">
-	@for (day of daysOfTheWeek; track $index) {
-		@let dayDigit = getDaysOfTheWeekDigits()[$index] ;
-			@if (isToday(day)) {
-				
-				<div class="day" [ngClass]="selectedDay === day ? 'selected-day': 'unselected-day'"
-				     (click)="onClick(day, dayDigit)">
-					<p>{{ day }}</p>
-					<mat-spinner mode="determinate" strokeWidth="4" [diameter]="spinnerDiameter" [value]="progressPercentage"
-					             class="progress-spinner">
-					</mat-spinner>
-					<p class="day-number">{{ dayDigit }}</p>
-				</div>
-			} @else {
-				
-				<div class="day" [ngClass]="selectedDay === day ? 'selected-day': 'unselected-day'"
-				     (click)="onClick(day, dayDigit)">
-					<p>{{ day }}</p>
-					<p class="day-number">{{ dayDigit }}</p>
-				</div>
-			}
-		
-		
-	}
+  @for (day of daysOfTheWeek; track $index) {
+  @let dayDigit = getDaysOfTheWeekDigits()[$index] ;
+  @if (selectedDay === day) {
+
+  <div class="day" [ngClass]="selectedDay === day ? 'selected-day': 'unselected-day'" (click)="onClick(day, dayDigit)">
+    <p>{{ day }}</p>
+    <mat-spinner mode="determinate" strokeWidth="4" [diameter]="spinnerDiameter" [value]="progressPercentage"
+      class="progress-spinner">
+    </mat-spinner>
+    <p class="day-number">{{ dayDigit }}</p>
+  </div>
+  } @else {
+
+  <div class="day" [ngClass]="selectedDay === day ? 'selected-day': 'unselected-day'" (click)="onClick(day, dayDigit)">
+    <p>{{ day }}</p>
+    <p class="day-number">{{ dayDigit }}</p>
+  </div>
+  }
+
+
+  }
 </div>

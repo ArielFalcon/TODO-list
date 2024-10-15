@@ -1,13 +1,15 @@
 <app-days-of-the-week></app-days-of-the-week>
 
 @defer (on immediate ) {
-	<app-task-table (_addTask)="toggleAddTaskForm()"></app-task-table>
+<app-task-table (_addTask)="toggleAddTaskForm()"></app-task-table>
 } @loading (minimum 500ms) {
-	<app-loader></app-loader>
+<app-loader></app-loader>
 } @error {
-	<p>Error</p>
+<p>Error</p>
 }
 
 @if (showAddTaaskForm) {
-	<app-task-form (_closed)="toggleAddTaskForm()"></app-task-form>
+<app-task-form (_closed)="toggleAddTaskForm()"></app-task-form>
 }
+
+<app-task-progress></app-task-progress>

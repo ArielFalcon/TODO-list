@@ -1,0 +1,13 @@
+<div class="container">
+	<div class="progress">
+		<button mat-mini-fab class="control-btn decrement" (click)="decrement()" [disabled]="progressPercentage === 0">
+			<mat-icon>remove</mat-icon>
+		</button>
+		<div class="progress-bar" [style.width.%]="progressPercentage"  [ngClass]="progressColor">
+			<p class="task-progress">TEXTO DE TITULO DE TAREA</p>
+		</div>
+		<button mat-mini-fab class="control-btn increment" (click)="increment()" [disabled]="progressPercentage === 100">
+			<mat-icon>add</mat-icon>
+		</button>
+	</div>
+</div>

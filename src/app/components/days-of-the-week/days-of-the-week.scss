@@ -3,7 +3,7 @@
   display: flex;
   height: clamp(50px, 10vw, 120px);
   justify-content: center;
-  gap: 16px;
+  gap: 24px;
   margin: 24px;
   overflow-x: scroll;
   scroll-behavior: smooth;
@@ -15,14 +15,14 @@
 
   .day {
     position: relative;
-    max-width: 120px;
+    max-width: 108px;
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 1;
     gap: 25%;
     border-radius: 24px;
-    padding: 12px;
+    padding: 8px;
     transition: transform 0.2s ease-in-out;
 
     @media (max-width: 1200px) {
