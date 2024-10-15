@@ -1,4 +1,13 @@
-import {Component, ElementRef, EventEmitter, HostListener, inject, OnInit, Output} from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	inject,
+	OnInit,
+	Output
+} from '@angular/core';
 import {TasksCrudService} from "@/services/tasks-crud.service";
 import {EState, ITaskDTO} from "@/models/tasks.model";
 import {MatButton} from "@angular/material/button";
@@ -30,6 +39,7 @@ import {ShowAlertService} from "@/services/show-alert.service";
 	providers: [
 		provideNativeDateAdapter(),
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss'
 })
@@ -82,6 +92,9 @@ export class TaskFormComponent implements OnInit{
 			priority: this.taskForm.get('priority')?.value,
 			deadline: this.formatDeadline as unknown as Timestamp,
 			state: this.taskForm.get('state')?.value,
+			goal: 0,
+			goalMetric: null,
+			frequency: null, /*TODO recibir datos*/
 		}
 	}
   

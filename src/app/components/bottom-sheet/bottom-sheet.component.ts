@@ -1,4 +1,4 @@
-import {Component, Inject, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, inject} from '@angular/core';
 import {MatLine} from "@angular/material/core";
 import {MatListItem, MatNavList} from "@angular/material/list";
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom-sheet";
@@ -27,7 +27,8 @@ interface IAction {
     MatNavList
   ],
   templateUrl: './bottom-sheet.component.html',
-  styleUrl: './bottom-sheet.component.scss'
+  styleUrl: './bottom-sheet.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomSheetComponent {
   private _bottomSheetRef =

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, signal} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
-import {NgClass} from "@angular/common";
+import {DatePipe, NgClass} from "@angular/common";
 import {MatMiniFabButton} from "@angular/material/button";
+import {ITaskDTO, Task} from "@/models/tasks.model";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-task-progress',
@@ -9,15 +11,26 @@ import {MatMiniFabButton} from "@angular/material/button";
   imports: [
     MatIcon,
     NgClass,
-    MatMiniFabButton
+    MatMiniFabButton,
+    DatePipe,
+    MatExpansionModule
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './task-progress.component.html',
   styleUrls: ['./task-progress.component.scss']
 })
-export class TaskProgressComponent {
+export class TaskProgressComponent implements OnInit{
   progressPercentage = 0;
   maxProgress = 100;
-  progressStep = 10;
+  progressStep = 20;
+  readonly panelOpenState = signal(false);
+  @Input() task: ITaskDTO;
+  
+  constructor() {
+    this.task = new Task();
+  }
+  
+  ngOnInit() {}
   
   increment() {
     if (this.progressPercentage < this.maxProgress) {
@@ -32,12 +45,21 @@ export class TaskProgressComponent {
   }
   
   get progressColor() {
-    if (this.progressPercentage <= 20) return 'color-step-1';
-    if (this.progressPercentage > 20 && this.progressPercentage <= 40) return 'color-step-2';
-    if (this.progressPercentage > 40 && this.progressPercentage <= 60) return 'color-step-3';
-    if (this.progressPercentage > 60 && this.progressPercentage <= 80) return 'color-step-4';
-    if (this.progressPercentage > 80 && this.progressPercentage < 100) return 'color-step-5';
-    if (this.progressPercentage === 100) return 'color-full';
-    return '';
+    switch (true) {
+      case (this.progressPercentage <= 20):
+        return 'color-step-1';
+      case (this.progressPercentage > 20 && this.progressPercentage <= 40):
+        return 'color-step-2';
+      case (this.progressPercentage > 40 && this.progressPercentage <= 60):
+        return 'color-step-3';
+      case (this.progressPercentage > 60 && this.progressPercentage <= 80):
+        return 'color-step-4';
+      case (this.progressPercentage > 80 && this.progressPercentage < 100):
+        return 'color-step-5';
+      case (this.progressPercentage === 100):
+        return 'color-full';
+      default:
+        return '';
+    }
   }
 }

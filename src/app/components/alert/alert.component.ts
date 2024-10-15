@@ -1,4 +1,4 @@
-import {Component, Inject, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, inject} from '@angular/core';
 import {
   MAT_SNACK_BAR_DATA,
   MatSnackBarAction,
@@ -18,7 +18,8 @@ import {MatButton} from "@angular/material/button";
     MatSnackBarAction
   ],
   templateUrl: './alert.component.html',
-  styleUrl: './alert.component.scss'
+  styleUrl: './alert.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertComponent {
   snackBarRef = inject(MatSnackBarRef);

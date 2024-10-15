@@ -1,12 +1,9 @@
-body {
-  font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
-  color: #404040;
-  background: #2a2a2a;
-}
-
 .container {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  color: #FFF;
   margin: 60px auto;
-  width: 400px;
   text-align: center;
 
   .progress {
@@ -84,13 +81,22 @@ body {
       border: none;
       cursor: pointer;
       z-index: 9999;
-      transition: all 0.3s linear;
+      transition: all 0.2s ease;
 
-      &.decrement:disabled, &.increment:disabled {
+      &.decrement:disabled {
         pointer-events: none;
         opacity: 0.1;
         color: #3C343B;
         background-color: #ccc;
+      }
+
+      &.increment:disabled {
+        pointer-events: none;
+        opacity: 0.8;
+        color: #D2FF72;
+        background-color: transparent;
+        border: 5px solid #FFF;
+        border-radius: 50px;
       }
 
       &.increment {
@@ -107,6 +113,33 @@ body {
         &:hover {
           background-color: #FFAD60;
         }
+      }
+    }
+  }
+
+  .details {
+    width: max-content;
+    max-width: 600px;
+    margin-top: 20px;
+    font-size: 1.5rem;
+
+    .header-status {
+      border-right: 1px solid #FFF;
+      justify-content: center;
+    }
+
+    .task-header {
+      justify-content: center;
+    }
+
+    .task-details-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 12px;
+
+      p {
+        max-width: 260px;
+        text-align: justify;
       }
     }
   }
