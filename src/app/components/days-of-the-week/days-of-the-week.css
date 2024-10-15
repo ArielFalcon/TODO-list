@@ -18,6 +18,7 @@
   align-items: center;
   flex: 1;
   width: 8vw;
+  border-radius: 24px;
   max-width: 116px;
   min-width: 108px;
   padding: 12px;
@@ -26,6 +27,10 @@
 .days-wrapper .day:hover {
   cursor: pointer;
   transform: scale(1.1);
+  box-shadow: 6px 6px 18px #221b44, -6px -6px 18px #433588;
+}
+.days-wrapper .day:active {
+  transform: scale(1);
 }
 .days-wrapper .day .day-number {
   position: absolute;
@@ -36,7 +41,6 @@
 }
 .days-wrapper .selected-day {
   background-color: #433878;
-  border-radius: 24px;
 }
 
 /*# sourceMappingURL=days-of-the-week.css.map */

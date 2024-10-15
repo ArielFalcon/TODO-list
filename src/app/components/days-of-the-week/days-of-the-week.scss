@@ -19,6 +19,7 @@
     align-items: center;
     flex: 1;
     width: 8vw;
+    border-radius: 24px;
     max-width: 116px;
     min-width: 108px;
     padding: 12px;
@@ -27,6 +28,12 @@
     &:hover {
       cursor: pointer;
       transform: scale(1.1);
+      box-shadow: 6px 6px 18px #221b44,
+      -6px -6px 18px #433588;
+    }
+
+    &:active {
+      transform: scale(1);
     }
 
     .progress-spinner {
@@ -43,6 +50,5 @@
 
   .selected-day {
     background-color: #433878;
-    border-radius: 24px;
   }
 }

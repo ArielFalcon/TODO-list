@@ -3,6 +3,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {WindowRefService} from "@/services/window-ref.service";
 import {debounceTime, Subscription} from "rxjs";
 import {EDayDTO, EDays} from "@/models/days.model";
+import {NgClass} from "@angular/common";
 
 
 
@@ -10,7 +11,8 @@ import {EDayDTO, EDays} from "@/models/days.model";
 	selector: 'app-days-of-the-week',
 	standalone: true,
 	imports: [
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		NgClass
 	],
 	templateUrl: './days-of-the-week.html',
 	styleUrl: './days-of-the-week.scss',
@@ -21,6 +23,7 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	todayDayOfTheWeek!: EDays;
 	spinnerDiameter!: number;
 	resizeSubscription!: Subscription;
+	selectedDay!: EDays;
 	
 	@Input() progressPercentage: number = 90;
 	@Output() _dayClicked = new EventEmitter<EDayDTO>();
@@ -30,6 +33,7 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	) {
 		this.setSpinnerDiameter();
 		window.addEventListener('resize', this.setSpinnerDiameter.bind(this));
+		this.selectedDay = this.getTodayDayOfTheWeek();
 	}
 	
 	ngOnInit(): void {
@@ -83,10 +87,15 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	
 	onClick(day: EDays, date: number): void {
 		console.log(`Clicked on ${day}, ${date}`);
+		this.changeSelectedDay(day);
 		this._dayClicked.emit({
 			day,
 			date,
 		});
+	}
+	
+	changeSelectedDay(day: EDays): void {
+		this.selectedDay = day;
 	}
 	
 	setSpinnerDiameter() {
