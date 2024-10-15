@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, inject, OnInit, Output} from '@angular/core';
 import {TasksCrudService} from "@/services/tasks-crud.service";
 import {EState, ITaskDTO} from "@/models/tasks.model";
 import {MatButton} from "@angular/material/button";
@@ -40,8 +40,11 @@ export class TaskFormComponent implements OnInit{
 	private formBuilder = inject(FormBuilder);
 	private alertService = inject(ShowAlertService);
 	@Output() _closed = new EventEmitter<boolean>();
-
-  constructor(){}
+	
+	constructor(
+		private elementRef: ElementRef,
+	) {
+	}
   
   ngOnInit(): void {
     this.taskForm = this.formBuilder.group({
@@ -53,6 +56,14 @@ export class TaskFormComponent implements OnInit{
       state: [EState.PENDANT, [Validators.required]],
     })
   }
+	
+	@HostListener('document:click', ['$event'])
+	onClickOutside(event: MouseEvent) {
+		const clickedInside = this.elementRef.nativeElement.contains(event.target);
+		if (!clickedInside) {
+			this._closed.emit(true);
+		}
+	}
   
   get tomorrowDate() {
 		return moment().add(1, 'days').format('YYYY-MM-DD')

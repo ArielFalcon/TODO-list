@@ -1,7 +1,15 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output
+} from '@angular/core';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {WindowRefService} from "@/services/window-ref.service";
-import {debounceTime, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {EDayDTO, EDays} from "@/models/days.model";
 import {NgClass} from "@angular/common";
 
@@ -28,9 +36,7 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	@Input() progressPercentage: number = 90;
 	@Output() _dayClicked = new EventEmitter<EDayDTO>();
 	
-	constructor(
-		private readonly windowRef: WindowRefService,
-	) {
+	constructor() {
 		this.setSpinnerDiameter();
 		window.addEventListener('resize', this.setSpinnerDiameter.bind(this));
 		this.selectedDay = this.getTodayDayOfTheWeek();
@@ -42,11 +48,11 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 		this.getDaysOfTheWeekDigits();
 		
 		this.setSpinnerDiameter();
-		this.resizeSubscription = this.windowRef.onResize()
-			.pipe(debounceTime(200))
-			.subscribe(() => {
-				this.setSpinnerDiameter();
-			});
+	}
+	
+	@HostListener('window:resize', ['$event'])
+	onResize() {
+		this.setSpinnerDiameter();
 	}
 	
 	ngOnDestroy() {
@@ -99,14 +105,11 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
 	}
 	
 	setSpinnerDiameter() {
-		const window = this.windowRef.nativeWindow;
-		if (window) {
-			const screenWidth = window.innerWidth;
-			if (screenWidth < 600) {
-				this.spinnerDiameter = screenWidth * 0.1; // 10% para pantallas pequeñas
-			} else {
-				this.spinnerDiameter = screenWidth * 0.05; // 5% para pantallas grandes
-			}
+		const screenWidth = window.innerWidth;
+		if (screenWidth < 600) {
+			this.spinnerDiameter = screenWidth * 0.1; // 10% para pantallas pequeñas
+		} else {
+			this.spinnerDiameter = screenWidth * 0.05; // 5% para pantallas grandes
 		}
 	}
 }

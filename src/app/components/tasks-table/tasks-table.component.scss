@@ -22,7 +22,8 @@
 .add-task-row {
   display: flex;
   place-content: center;
-  width: 99vw;
+  width: 100vw;
+  padding: 4px 0;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0 0 24px 24px;
   cursor: pointer;
