@@ -1,9 +1,7 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	ElementRef,
 	EventEmitter,
-	HostListener,
 	inject,
 	OnInit,
 	Output
@@ -21,6 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import moment from "moment";
 import {Timestamp} from "firebase/firestore";
 import {ShowAlertService} from "@/services/show-alert.service";
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
@@ -35,6 +34,7 @@ import {ShowAlertService} from "@/services/show-alert.service";
 		MatDatepickerModule,
 		MatInputModule,
 		MatFormFieldModule,
+		MatIcon,
 	],
 	providers: [
 		provideNativeDateAdapter(),
@@ -51,10 +51,7 @@ export class TaskFormComponent implements OnInit{
 	private alertService = inject(ShowAlertService);
 	@Output() _closed = new EventEmitter<boolean>();
 	
-	constructor(
-		private elementRef: ElementRef,
-	) {
-	}
+	constructor() {}
   
   ngOnInit(): void {
     this.taskForm = this.formBuilder.group({
@@ -66,14 +63,6 @@ export class TaskFormComponent implements OnInit{
       state: [EState.PENDANT, [Validators.required]],
     })
   }
-	
-	@HostListener('document:click', ['$event'])
-	onClickOutside(event: MouseEvent) {
-		const clickedInside = this.elementRef.nativeElement.contains(event.target);
-		if (!clickedInside) {
-			this._closed.emit(true);
-		}
-	}
   
   get tomorrowDate() {
 		return moment().add(1, 'days').format('YYYY-MM-DD')
@@ -110,4 +99,8 @@ export class TaskFormComponent implements OnInit{
 			}
     )
   }
+	
+	closeForm() {
+		this._closed.emit(true);
+	}
 }
