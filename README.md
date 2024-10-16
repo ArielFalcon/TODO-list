@@ -22,9 +22,10 @@ La aplicación **TODO-list** es una herramienta diseñada para gestionar tareas 
 
 - **Gestión de Tareas:** Visualizar, crear, editar y eliminar tareas.
 - **Interfaz Amigable:** Utiliza Angular Material para una experiencia de usuario atractiva.
-- **Autenticación:** Permite a los usuarios registrarse y acceder a sus tareas de forma segura.
+- ~**Autenticación:** Permite a los usuarios registrarse y acceder a sus tareas de forma segura.~ (⚠️ EN PROGRESO)
 - **Sincronización en Tiempo Real:** Los cambios se reflejan instantáneamente gracias a Firebase.
 - **Responsive Design:** Accesible desde dispositivos móviles y de escritorio.
+- **Componentes personalizados:** Utiliza componentes creados desde 0, hechos a medida para los requisitos de la aplicación.
 
 ## Instalación
 
