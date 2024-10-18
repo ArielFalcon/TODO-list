@@ -11,6 +11,9 @@
       "@components/*": [
         "src/app/components"
       ],
+      "@styles/*": [
+        "src/app/assets/styles"
+      ],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

@@ -1,16 +1,20 @@
+@import 'src/app/assets/styles/_variables.scss';
+@import "src/app/assets/styles/_mixins.scss";
+
 .days-wrapper {
   color: white;
   display: flex;
   justify-content: center;
   gap: 2vw;
-  margin: 24px;
-  overflow-x: scroll;
+  margin: 24px 0;
+  overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 20px;
+  padding: 20px 0;
   user-select: none;
 
   @include below($md) {
     min-height: 100px;
+    justify-content: flex-start;
   }
 
   @include above($md) {
@@ -24,6 +28,7 @@
   .day {
     position: relative;
     display: flex;
+    flex: 0 0 auto;
     width: 160px;
     min-width: 160px;
     flex-direction: column;
@@ -35,18 +40,25 @@
 
     @include below($md) {
       flex-direction: row;
-      padding: 0 2vw;
-      gap: 3vw;
+      padding: 0 24px;
       place-content: center;
     }
 
-    p {
+    p.day-word {
       margin: 0;
 
       @include above($md) {
         font-size: 1.2rem;
         font-weight: bold;
       }
+
+      @include below($md) {
+        width: 56px;
+      }
+    }
+
+    p.day-number {
+      margin: 0;
     }
 
     &:hover {

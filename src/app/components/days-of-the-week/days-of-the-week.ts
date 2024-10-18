@@ -1,15 +1,23 @@
 import {
-  ChangeDetectionStrategy,
+  AfterViewInit,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
-  EventEmitter, HostListener,
-  Input,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input, OnDestroy,
   OnInit,
-  Output
+  Output,
+  QueryList,
+  ViewChildren
 } from '@angular/core';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { EDayDTO, EDays } from "@/models/days.model";
 import { NgClass } from "@angular/common";
 import {EBreakpoints} from "@/models/viewport.model";
+import {PlatformService} from "@/services/platform.service";
+import {Subscription} from "rxjs";
+
 
 @Component({
   selector: 'app-days-of-the-week',
@@ -22,32 +30,45 @@ import {EBreakpoints} from "@/models/viewport.model";
   styleUrl: './days-of-the-week.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DaysOfTheWeek implements OnInit {
+export class DaysOfTheWeek implements OnInit, AfterViewInit, OnDestroy {
+  private resizeSubscription!: Subscription;
   daysOfTheWeek!: EDays[];
   todayDayOfTheWeek!: EDays;
   selectedDay!: EDays;
   spinnerDiameter!: number;
   spinnerStrokeWidth!: number;
+  platformService = inject(PlatformService);
+  cdr = inject(ChangeDetectorRef);
 
-  @Input() progressPercentage: number = 90;
+  @Input() progressPercentage: number = 40;
   @Output() _dayClicked = new EventEmitter<EDayDTO>();
-
+  @ViewChildren('dayElement') dayElements!: QueryList<ElementRef>;
+  
   constructor() {
     this.selectedDay = this.getTodayDayOfTheWeek();
   }
 
   ngOnInit(): void {
-    this.setSpinnerProps();
-    
+    this.setSpinnerProps(this.platformService.windowWidth);
+
     this.daysOfTheWeek = this.getDaysOfTheWeek();
     this.todayDayOfTheWeek = this.getTodayDayOfTheWeek();
     this.getDaysOfTheWeekDigits();
-    
   }
   
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.setSpinnerProps();
+  ngAfterViewInit() {
+    this.scrollToSelectedDay();
+    
+    this.resizeSubscription = this.platformService.resize$.subscribe((width: number) => {
+      if (width) this.setSpinnerProps(width);
+      this.cdr.detectChanges();
+    })
+  }
+  
+  ngOnDestroy() {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
   }
 
   getDaysOfTheWeek(): EDays[] {
@@ -87,16 +108,29 @@ export class DaysOfTheWeek implements OnInit {
 
   changeSelectedDay(day: EDays): void {
     this.selectedDay = day;
+    this.scrollToSelectedDay();
   }
   
-  setSpinnerProps() {
-    const screenWidth = window.innerWidth;
-    if (screenWidth > EBreakpoints.MD) {
-      this.spinnerDiameter = 60;
-      this.spinnerStrokeWidth = 6;
-    } else {
-      this.spinnerDiameter = 40;
-      this.spinnerStrokeWidth = 4;
+  setSpinnerProps(width: number) {
+      if (width > EBreakpoints.MD) {
+        console.log('setting spinner props to large')
+        this.spinnerDiameter = 60;
+        this.spinnerStrokeWidth = 6;
+      } else {
+        console.log('setting spinner props to small')
+        this.spinnerDiameter = 40;
+        this.spinnerStrokeWidth = 4;
+      }
+  }
+  
+  scrollToSelectedDay() {
+    if (this.platformService.isBrowser()) {
+    const selectedIndex = this.daysOfTheWeek.indexOf(this.selectedDay);
+    const selectedElement = this.dayElements.toArray()[selectedIndex];
+    
+    if (selectedElement) {
+      selectedElement.nativeElement.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    }
     }
   }
 }

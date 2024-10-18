@@ -1,11 +1,3 @@
-/* Error: Undefined mixin.
- *    ,
- * 12 | /   @include below($md) {
- * 13 | |     min-height: 100px;
- * 14 | \   }
- *    '
- *   days-of-the-week.scss 12:3  root stylesheet */
-
 body::before {
     font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
     "Droid Sans Mono", monospace, monospace;
