@@ -113,11 +113,9 @@ export class DaysOfTheWeek implements OnInit, AfterViewInit, OnDestroy {
   
   setSpinnerProps(width: number) {
       if (width > EBreakpoints.MD) {
-        console.log('setting spinner props to large')
         this.spinnerDiameter = 60;
         this.spinnerStrokeWidth = 6;
       } else {
-        console.log('setting spinner props to small')
         this.spinnerDiameter = 40;
         this.spinnerStrokeWidth = 4;
       }
