@@ -1,19 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  HostListener,
+  EventEmitter, HostListener,
   Input,
-  OnDestroy,
   OnInit,
   Output
 } from '@angular/core';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { Subscription } from "rxjs";
 import { EDayDTO, EDays } from "@/models/days.model";
 import { NgClass } from "@angular/common";
-
-
+import {EBreakpoints} from "@/models/viewport.model";
 
 @Component({
   selector: 'app-days-of-the-week',
@@ -26,39 +22,32 @@ import { NgClass } from "@angular/common";
   styleUrl: './days-of-the-week.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DaysOfTheWeek implements OnInit, OnDestroy {
+export class DaysOfTheWeek implements OnInit {
   daysOfTheWeek!: EDays[];
   todayDayOfTheWeek!: EDays;
-  spinnerDiameter!: number;
-  resizeSubscription!: Subscription;
   selectedDay!: EDays;
+  spinnerDiameter!: number;
+  spinnerStrokeWidth!: number;
 
   @Input() progressPercentage: number = 90;
   @Output() _dayClicked = new EventEmitter<EDayDTO>();
 
   constructor() {
-    this.setSpinnerDiameter();
-    window.addEventListener('resize', this.setSpinnerDiameter.bind(this));
     this.selectedDay = this.getTodayDayOfTheWeek();
   }
 
   ngOnInit(): void {
+    this.setSpinnerProps();
+    
     this.daysOfTheWeek = this.getDaysOfTheWeek();
     this.todayDayOfTheWeek = this.getTodayDayOfTheWeek();
     this.getDaysOfTheWeekDigits();
-
-    this.setSpinnerDiameter();
+    
   }
-
+  
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.setSpinnerDiameter();
-  }
-
-  ngOnDestroy() {
-    if (this.resizeSubscription) {
-      this.resizeSubscription.unsubscribe();
-    }
+    this.setSpinnerProps();
   }
 
   getDaysOfTheWeek(): EDays[] {
@@ -83,10 +72,6 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
     return this.getDaysOfTheWeek()[new Date().getDay()];
   }
 
-  isToday(day: EDays): boolean {
-    return day === this.todayDayOfTheWeek;
-  }
-
   get isDone(): boolean {
     return this.progressPercentage === 100;
   }
@@ -103,16 +88,15 @@ export class DaysOfTheWeek implements OnInit, OnDestroy {
   changeSelectedDay(day: EDays): void {
     this.selectedDay = day;
   }
-
-  setSpinnerDiameter() {
+  
+  setSpinnerProps() {
     const screenWidth = window.innerWidth;
-    console.log('screenWidth prev', screenWidth);
-    if (screenWidth > 1200) {
-      console.log('screenWidth', screenWidth);
-      this.spinnerDiameter = screenWidth * 0.1 > 60 ? 60 : screenWidth * 0.1;
+    if (screenWidth > EBreakpoints.MD) {
+      this.spinnerDiameter = 60;
+      this.spinnerStrokeWidth = 6;
     } else {
-      console.log('screenWidth l', screenWidth);
-      this.spinnerDiameter = screenWidth * 0.02 < 40 ? 40 : screenWidth * 0.05;
+      this.spinnerDiameter = 40;
+      this.spinnerStrokeWidth = 4;
     }
   }
 }

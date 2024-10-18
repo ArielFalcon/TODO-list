@@ -1,46 +1,17 @@
-.days-wrapper {
-  color: white;
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin: 24px;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  padding: 20px;
-}
-.days-wrapper::-webkit-scrollbar {
-  display: none;
-}
-.days-wrapper .day {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  width: 8vw;
-  border-radius: 24px;
-  max-width: 116px;
-  min-width: 108px;
-  padding: 12px;
-  transition: transform 0.2s ease-in-out;
-}
-.days-wrapper .day:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-  box-shadow: 6px 6px 18px #221b44, -6px -6px 18px #433588;
-}
-.days-wrapper .day:active {
-  transform: scale(1);
-}
-.days-wrapper .day .day-number {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 55%;
-  text-align: center;
-}
-.days-wrapper .selected-day {
-  background-color: #433878;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "src/app/assets/styles/_mixins.scss";
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   days-of-the-week.scss 1:9  root stylesheet */
 
-/*# sourceMappingURL=days-of-the-week.css.map */
+body::before {
+    font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+    "Droid Sans Mono", monospace, monospace;
+    white-space: pre;
+    display: block;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-bottom: 2px solid black;
+    content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"src/app/assets/styles/_mixins.scss\";\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   days-of-the-week.scss 1:9  root stylesheet";
+}

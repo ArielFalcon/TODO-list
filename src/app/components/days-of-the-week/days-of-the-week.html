@@ -5,7 +5,8 @@
 
   <div class="day" [ngClass]="selectedDay === day ? 'selected-day': 'unselected-day'" (click)="onClick(day, dayDigit)">
     <p>{{ day }}</p>
-    <mat-spinner mode="determinate" strokeWidth="4" [diameter]="spinnerDiameter" [value]="progressPercentage"
+	  <mat-spinner mode="determinate" [strokeWidth]="spinnerStrokeWidth" [diameter]="spinnerDiameter"
+	               [value]="progressPercentage"
       class="progress-spinner">
     </mat-spinner>
     <p class="day-number">{{ dayDigit }}</p>
@@ -17,7 +18,5 @@
     <p class="day-number">{{ dayDigit }}</p>
   </div>
   }
-
-
   }
 </div>

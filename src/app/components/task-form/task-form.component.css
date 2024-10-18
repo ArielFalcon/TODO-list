@@ -4,15 +4,45 @@
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  padding: 30px;
-  border-radius: 51px;
+    border-radius: 32px;
   background: linear-gradient(145deg, #121012, #0f0e0f);
   box-shadow: 20px 20px 41px #070607, -20px -20px 41px #1b181b;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
+    z-index: 999;
+}
+
+.task-form .form-input {
+    margin: 0 20px;
+}
+
+.task-form button.close-button {
+    display: flex;
+    place-content: center;
+    align-items: center;
+    background-color: #800000;
+    height: 40px;
+    border-radius: 32px 32px 0 0;
+    margin-bottom: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.task-form button.close-button:hover {
+    background: #9f0000;
+}
+
+.task-form button.close-button:active {
+    background: #800000;
+    box-shadow: inset 11px 11px 22px #610000, inset -11px -11px 22px #9f0000;
+}
+
+.task-form button.close-button .close-icon {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bolder;
 }
 .task-form button.submit-btn {
   margin-top: 20px;

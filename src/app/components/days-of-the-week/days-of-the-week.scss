@@ -1,13 +1,24 @@
+@import "src/app/assets/styles/_mixins.scss";
+@import "src/app/assets/styles/_variables.scss";
+
 .days-wrapper {
   color: white;
   display: flex;
-  height: clamp(50px, 10vw, 120px);
   justify-content: center;
-  gap: 24px;
+  gap: 2vw;
   margin: 24px;
   overflow-x: scroll;
   scroll-behavior: smooth;
   padding: 20px;
+  user-select: none;
+
+  @include below($md) {
+    min-height: 100px;
+  }
+
+  @include above($md) {
+    min-height: 200px;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -15,25 +26,30 @@
 
   .day {
     position: relative;
-    max-width: 108px;
     display: flex;
+    width: 160px;
+    min-width: 160px;
     flex-direction: column;
     align-items: center;
-    flex: 1;
-    gap: 25%;
+    gap: 40px;
     border-radius: 24px;
-    padding: 8px;
+    padding: 20px;
     transition: transform 0.2s ease-in-out;
 
-    @media (max-width: 1200px) {
+    @include below($md) {
       flex-direction: row;
-      gap: 24px;
+      padding: 0 3vw;
+      gap: 5vw;
       place-content: center;
-
     }
 
     p {
       margin: 0;
+
+      @include above($md) {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
     }
 
     &:hover {
@@ -46,7 +62,6 @@
     &:active {
       transform: scale(1);
     }
-
   }
 
   .selected-day {
@@ -60,7 +75,7 @@
       transform: translateY(-50%);
       text-align: center;
 
-      @media (max-width: 1200px) {
+      @include below($md) {
         top: 50%;
         right: 20%;
         transform: translate(50%, -50%);
