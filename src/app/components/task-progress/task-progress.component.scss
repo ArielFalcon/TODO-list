@@ -124,14 +124,14 @@
     color: #FFF;
     font-weight: bold;
     margin-top: 2vh;
-    padding: 10px 20px;
+    padding: 16px 20px;
     transition: all 0.3s ease;
     overflow: hidden;
 
     &:hover {
       background-color: #FF5F5F;
       transform: scale(1.2);
-      padding-bottom: 52px;
+      padding-bottom: 48px;
     }
 
     .alert-icon {
