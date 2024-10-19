@@ -1,4 +1,13 @@
-import {Component, EventEmitter, inject, OnInit, Output, signal, WritableSignal} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  OnInit,
+  Output,
+  signal,
+  WritableSignal
+} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ETaskTableColumns, ITask } from "@/models/tasks.model";
 import {AsyncPipe, DatePipe} from "@angular/common";
@@ -10,6 +19,7 @@ import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import {Observable} from "rxjs";
 import {TasksCrudService} from "@/services/tasks-crud.service";
+import {InputButtonComponent} from "@/components/_inputs/input-button/input-button.component";
 
 @Component({
   selector: 'app-task-table',
@@ -25,9 +35,11 @@ import {TasksCrudService} from "@/services/tasks-crud.service";
     MatMiniFabButton,
     MatIcon,
     AsyncPipe,
+    InputButtonComponent,
   ],
   templateUrl: './tasks-table.component.html',
-  styleUrl: './tasks-table.component.scss'
+  styleUrl: './tasks-table.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskTableComponent implements OnInit{
   tasks$ !: Observable<ITask[]>

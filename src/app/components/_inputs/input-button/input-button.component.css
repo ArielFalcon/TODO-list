@@ -1,0 +1,30 @@
+.general-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #433878;
+    border-radius: 50px;
+    color: #FFF;
+    cursor: pointer;
+    padding: 8px 12px;
+    margin: 8px 0;
+    transition: all 0.4s ease-in-out;
+    border: 2px solid #221b44;
+    box-shadow: inset 2px 2px 5px #221b44, inset -2px -2px 5px #7d6baf, 2px 2px 5px #221b44, -2px -2px 5px #7d6baf;
+}
+
+.general-btn:hover {
+    outline: none;
+    box-shadow: inset 2px 2px 5px #7d6baf, inset -2px -2px 5px #7d6baf, 2px 2px 5px #221b44, -2px -2px 5px #221b44;
+}
+
+.general-btn .center-text {
+    flex: 1;
+    text-align: center;
+}
+
+.general-btn ng-content {
+    margin-right: auto;
+}
+
+/*# sourceMappingURL=input-button.component.css.map */

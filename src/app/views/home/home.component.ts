@@ -5,7 +5,8 @@ import { LoaderComponent } from "@/components/loader/loader.component";
 import { DaysOfTheWeek } from "@/components/days-of-the-week/days-of-the-week";
 import { TaskProgressComponent } from "@/components/task-progress/task-progress.component";
 import {ITaskDTO} from "@/models/tasks.model";
-import {ButtonComponent} from "@/components/button/button.component";
+import {InputButtonComponent} from "@/components/_inputs/input-button/input-button.component";
+import {InputTextComponent} from "@/components/_inputs/input-text/input-text.component";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ import {ButtonComponent} from "@/components/button/button.component";
 		LoaderComponent,
 		DaysOfTheWeek,
 		TaskProgressComponent,
-		ButtonComponent,
+		InputButtonComponent,
+		InputTextComponent,
 	],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

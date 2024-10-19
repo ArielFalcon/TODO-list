@@ -12,6 +12,8 @@
 <app-task-form (_closed)="toggleAddTaskForm()"></app-task-form>
 }
 
+<app-input-text></app-input-text>
+
 @if (selectedTask) {
 	<app-task-progress [task]="selectedTask"></app-task-progress>
 }
