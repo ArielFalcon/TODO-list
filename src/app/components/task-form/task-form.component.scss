@@ -16,6 +16,17 @@
 
   .form-input {
     margin: 0 20px;
+
+    p {
+      color: #fff;
+      font-size: 18px;
+      margin: 0 0 12px 12px;
+    }
+
+    .textarea {
+      resize: none;
+      height: 15vh;
+    }
   }
 
   button.close-button {

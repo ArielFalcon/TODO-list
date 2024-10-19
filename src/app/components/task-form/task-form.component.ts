@@ -20,6 +20,7 @@ import moment from "moment";
 import {Timestamp} from "firebase/firestore";
 import {ShowAlertService} from "@/services/show-alert.service";
 import {MatIcon} from "@angular/material/icon";
+import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 
 
 @Component({
@@ -35,6 +36,8 @@ import {MatIcon} from "@angular/material/icon";
 		MatInputModule,
 		MatFormFieldModule,
 		MatIcon,
+		MatButtonToggleGroup,
+		MatButtonToggle,
 	],
 	providers: [
 		provideNativeDateAdapter(),

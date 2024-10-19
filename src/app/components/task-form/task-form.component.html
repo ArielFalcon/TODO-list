@@ -9,7 +9,7 @@
 	</mat-form-field>
 	<mat-form-field class="form-input">
 		<mat-label>Descripción</mat-label>
-		<textarea matInput formControlName="description" placeholder="Cuentame más"></textarea>
+		<textarea class="textarea" matInput formControlName="description" placeholder="Cuentame más"></textarea>
 	</mat-form-field>
 	<mat-form-field class="form-input">
 		<mat-label>Fecha Límite</mat-label>
@@ -30,15 +30,17 @@
 		}
 		</mat-select>
 	</mat-form-field>
-	<mat-form-field class="form-input">
-		<mat-label>Prioridad</mat-label>
-		<mat-select formControlName="priority">
-		@for (priority of [1,2,3,4,5]; track $index) {
-			<mat-option [value]="priority">Nivel {{priority}}</mat-option>
-		}
-		</mat-select>
-	</mat-form-field>
+	<div class="form-input">
+		<p>Prioridad</p>
+		<mat-button-toggle-group formControlName="priority">
+			@for (priority of [1, 2, 3, 4, 5]; track $index) {
+				<mat-button-toggle [value]="priority">Nivel {{ priority }}</mat-button-toggle>
+			}
+		</mat-button-toggle-group>
+	</div>
 	
 	<button class="submit-btn" mat-raised-button [disabled]="taskForm.invalid" (click)="onSubmit()">Guardar</button>
 </form>
+
+
 
