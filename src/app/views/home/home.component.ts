@@ -4,6 +4,7 @@ import { TaskFormComponent } from "@/components/task-form/task-form.component";
 import { LoaderComponent } from "@/components/loader/loader.component";
 import { DaysOfTheWeek } from "@/components/days-of-the-week/days-of-the-week";
 import { TaskProgressComponent } from "@/components/task-progress/task-progress.component";
+import {ITaskDTO} from "@/models/tasks.model";
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,17 @@ import { TaskProgressComponent } from "@/components/task-progress/task-progress.
 })
 export class HomeComponent {
   showAddTaaskForm: boolean = false;
+  selectedTask?: ITaskDTO;
 
   constructor() { }
 
   toggleAddTaskForm() {
     this.showAddTaaskForm = !this.showAddTaaskForm;
+  }
+  
+  onTaskSelected(task: ITaskDTO) {
+    this.selectedTask = task;
+    console.log('Task selected:', task);
   }
 
 }

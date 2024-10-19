@@ -36,6 +36,7 @@ export class TaskTableComponent implements OnInit{
   selectedTask: WritableSignal<ITask | null> = signal(null);
   private _bottomSheet = inject(MatBottomSheet);
   @Output() _addTask = new EventEmitter<boolean>();
+  @Output() _selectedTask = new EventEmitter<ITask>();
   
   constructor(private tasksCrud:TasksCrudService){}
   
@@ -50,6 +51,7 @@ export class TaskTableComponent implements OnInit{
 
   onClickRow(row: ITask): void {
     this.selectedTask.set(row)
+    this._selectedTask.emit(row)
   }
   
   onAddTaskClick(): void {

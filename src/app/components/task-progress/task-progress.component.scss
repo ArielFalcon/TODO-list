@@ -117,30 +117,4 @@
       }
     }
   }
-
-  .details {
-    width: clamp(420px, 30vw, 600px);
-    margin-top: 20px;
-    font-size: 1.5rem;
-
-    .header-status {
-      border-right: 1px solid #FFF;
-      justify-content: center;
-    }
-
-    .task-header {
-      justify-content: center;
-    }
-
-    .task-details-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 12px;
-
-      p {
-        max-width: 260px;
-        text-align: justify;
-      }
-    }
-  }
 }

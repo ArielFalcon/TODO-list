@@ -4,35 +4,12 @@
 			<mat-icon>remove</mat-icon>
 		</button>
 		<div class="progress-bar" [style.width.%]="progressPercentage"  [ngClass]="progressColor">
-			<p class="task-progress">TEXTO DE TITULO DE TAREA</p>
+			<p class="task-progress">{{ task.title }}</p>
 		</div>
 		<button mat-mini-fab class="control-btn increment" (click)="increment()" [disabled]="progressPercentage === 100">
 			<mat-icon>{{progressPercentage === 100 ? 'done':'add'}}</mat-icon>
 		</button>
 	</div>
 	
-	<div class="details">
-		<mat-accordion>
-			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-				<mat-expansion-panel-header>
-					<mat-panel-title class="header-status">{{panelOpenState() ? 'Ocultar' : 'Mostrar'}}</mat-panel-title>
-					<mat-panel-description class="task-header">
-						Detalles
-					</mat-panel-description>
-				</mat-expansion-panel-header>
-				<article class="task-details-row">
-					<p>Prioridad</p>
-					<p>{{ task.priority }}</p>
-				</article>
-				<article class="task-details-row">
-					<p>Fecha límite</p>
-					<p>{{task.deadline?.toDate() | date:"dd/MM/yyyy HH:mm:ss"}}</p>
-				</article>
-				<article class="task-details-row">
-					<p>Descripción</p>
-					<p>{{task.description ?? 'No pusiste ninguna...'}}</p>
-				</article>
-			</mat-expansion-panel>
-		</mat-accordion>
-	</div>
+	<app-task-details [task]="task" (taskProgressChange)="handleTaskProgressChange($event)"></app-task-details>
 </div>

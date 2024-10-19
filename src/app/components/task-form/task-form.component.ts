@@ -58,8 +58,8 @@ export class TaskFormComponent implements OnInit{
   
   ngOnInit(): void {
     this.taskForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      description: [''],
+	    title: [null, [Validators.required]],
+	    description: [null],
       priority: [1],
       deadline: [this.tomorrowDate, [Validators.required]],
 	    timeLimit: ['00:00'],

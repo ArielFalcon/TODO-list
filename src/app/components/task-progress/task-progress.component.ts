@@ -1,9 +1,16 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, signal} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatMiniFabButton} from "@angular/material/button";
-import {ITaskDTO, Task} from "@/models/tasks.model";
+import {ITaskDTO} from "@/models/tasks.model";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
+import {TaskDetailsComponent} from "@/components/task-details/task-details.component";
 
 @Component({
   selector: 'app-task-progress',
@@ -13,24 +20,28 @@ import {MatExpansionModule} from "@angular/material/expansion";
     NgClass,
     MatMiniFabButton,
     DatePipe,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    TaskDetailsComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './task-progress.component.html',
   styleUrls: ['./task-progress.component.scss']
 })
 export class TaskProgressComponent implements OnInit{
-  progressPercentage = 0;
+  previousProgressPercentage = 0;
+  progressPercentage = 40;
   maxProgress = 100;
   progressStep = 20;
-  readonly panelOpenState = signal(false);
-  @Input() task: ITaskDTO;
+  @Input() task!: ITaskDTO;
   
   constructor() {
-    this.task = new Task();
   }
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.previousProgressPercentage = this.progressPercentage;
+  }
   
   increment() {
     if (this.progressPercentage < this.maxProgress) {
@@ -61,5 +72,9 @@ export class TaskProgressComponent implements OnInit{
       default:
         return '';
     }
+  }
+  
+  handleTaskProgressChange(progress: number) {
+    this.progressPercentage = progress;
   }
 }

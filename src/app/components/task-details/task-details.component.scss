@@ -1,0 +1,33 @@
+.details {
+  width: clamp(420px, 30vw, 600px);
+  margin-top: 20px;
+  font-size: 1.5rem;
+
+  .header-status {
+    border-right: 1px solid #FFF;
+    justify-content: center;
+  }
+
+  .task-header {
+    justify-content: center;
+  }
+
+  .task-details-row {
+    display: flex;
+    place-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    margin: 12px 0;
+
+    p {
+      margin: 0;
+      max-width: 260px;
+      text-align: justify;
+    }
+
+    .default-text {
+      font-style: italic;
+      color: #F996F2;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 <app-days-of-the-week></app-days-of-the-week>
 
 @defer (on immediate ) {
-<app-task-table (_addTask)="toggleAddTaskForm()"></app-task-table>
+	<app-task-table (_addTask)="toggleAddTaskForm()" (_selectedTask)="onTaskSelected($event)"></app-task-table>
 } @loading (minimum 500ms) {
 <app-loader></app-loader>
 } @error {
@@ -12,4 +12,6 @@
 <app-task-form (_closed)="toggleAddTaskForm()"></app-task-form>
 }
 
-<app-task-progress></app-task-progress>
+@if (selectedTask) {
+	<app-task-progress [task]="selectedTask"></app-task-progress>
+}

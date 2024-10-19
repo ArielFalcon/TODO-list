@@ -1,0 +1,37 @@
+<div class="details">
+	<mat-accordion>
+		<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+			<mat-expansion-panel-header>
+				<mat-panel-title class="header-status">{{ panelOpenState() ? 'Ocultar' : 'Mostrar' }}</mat-panel-title>
+				<mat-panel-description class="task-header">
+					Detalles
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<article class="task-details-row">
+				<p>Estado</p>
+				<mat-button-toggle-group>
+					@for (state of taskPosibleStates; track $index) {
+						<mat-button-toggle value="{{state}}" (change)="onStateChange(state)" [checked]="task.state === state">
+							{{ state }}
+						</mat-button-toggle>
+					}
+				</mat-button-toggle-group>
+			</article>
+			<article class="task-details-row">
+				<p>Prioridad</p>
+				<p>{{ task.priority ?? "Ups! No elegiste" }}</p>
+			</article>
+			<article class="task-details-row">
+				<p>Fecha límite</p>
+				<p>{{
+            task.deadline?.toDate() | date:"dd/MM/yyyy HH:mm:ss"
+            ?? "Se valía elegir una!"
+					}}</p>
+			</article>
+			<article class="task-details-row">
+				<p>Descripción</p>
+				<p [class.default-text]="!task.description">{{ task.description ?? 'Y yo que sé, si no pones...' }}</p>
+			</article>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>
