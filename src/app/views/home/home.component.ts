@@ -5,17 +5,19 @@ import { LoaderComponent } from "@/components/loader/loader.component";
 import { DaysOfTheWeek } from "@/components/days-of-the-week/days-of-the-week";
 import { TaskProgressComponent } from "@/components/task-progress/task-progress.component";
 import {ITaskDTO} from "@/models/tasks.model";
+import {ButtonComponent} from "@/components/button/button.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    TaskTableComponent,
-    TaskFormComponent,
-    LoaderComponent,
-    DaysOfTheWeek,
-    TaskProgressComponent,
-  ],
+	imports: [
+		TaskTableComponent,
+		TaskFormComponent,
+		LoaderComponent,
+		DaysOfTheWeek,
+		TaskProgressComponent,
+		ButtonComponent,
+	],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

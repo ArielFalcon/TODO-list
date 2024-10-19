@@ -1,132 +1,17 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  color: #FFF;
-  margin-top: 5vh;
-  text-align: center;
-  user-select: none;
-}
-.container .progress {
-  margin: 0 auto;
-  width: clamp(380px, 20vw, 500px);
-  position: relative;
-  height: 60px;
-  padding: 4px;
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 24px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-.container .progress .progress-bar {
-  height: 100%;
-  border-radius: 24px 0 0 24px;
-  transition: 0.4s linear;
-  background-color: #FFB3B3;
-}
-.container .progress .progress-bar.color-step-1 {
-  background-color: #FF7F7F;
-}
-.container .progress .progress-bar.color-step-2 {
-  background-color: #FF9999;
-}
-.container .progress .progress-bar.color-step-3 {
-  background-color: #B3E2A7;
-}
-.container .progress .progress-bar.color-step-4 {
-  background-color: #9DDE8B;
-}
-.container .progress .progress-bar.color-step-5 {
-  background-color: #40A578;
-}
-.container .progress .progress-bar.color-step-5 > .task-progress {
-  color: #FFF;
-  mix-blend-mode: normal;
-}
-.container .progress .progress-bar.color-full {
-  background-color: #006769;
-  border-radius: 24px;
-}
-.container .progress .progress-bar.color-full > .task-progress {
-  color: #FFF;
-  mix-blend-mode: normal;
-}
-.container .progress .task-progress {
-  position: absolute;
-  font-weight: bold;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  margin-top: -10px;
-  color: white;
-  text-shadow: 0 1px black;
-  mix-blend-mode: difference;
-  transition: all 0.4s linear;
-}
-.container .progress .control-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent;
-  color: #FFF;
-  border: none;
-  cursor: pointer;
-  z-index: 2;
-  transition: all 0.2s ease;
-}
-.container .progress .control-btn.decrement:disabled {
-  pointer-events: none;
-  opacity: 0.1;
-  color: #3C343B;
-  background-color: #ccc;
-}
-.container .progress .control-btn.increment:disabled {
-  pointer-events: none;
-  opacity: 0.8;
-  color: #D2FF72;
-  background-color: transparent;
-  border: 5px solid #FFF;
-  border-radius: 50px;
-}
-.container .progress .control-btn.increment {
-  right: 5%;
-}
-.container .progress .control-btn.increment:hover {
-  background-color: #40A578;
-}
-.container .progress .control-btn.decrement {
-  left: 5%;
-}
-.container .progress .control-btn.decrement:hover {
-  background-color: #FFAD60;
-}
-.container .erase-btn {
-  position: relative;
-  background-color: #FF9999;
-  color: #FFF;
-  font-weight: bold;
-  margin-top: 2vh;
-  padding: 16px 20px;
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-.container .erase-btn:hover {
-  background-color: #FF5F5F;
-  transform: scale(1.2);
-  padding-bottom: 48px;
-}
-.container .erase-btn .alert-icon {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%) translateY(200%);
-  font-size: 1.5em;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-.container .erase-btn:hover .alert-icon {
-  transform: translateX(-50%) translateY(100%);
-  opacity: 1;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "shared";
+ *   |         ^^^^^^^^
+ *   '
+ *   task-progress.component.scss 1:9  root stylesheet */
 
-/*# sourceMappingURL=task-progress.component.css.map */
+body::before {
+    font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+    "Droid Sans Mono", monospace, monospace;
+    white-space: pre;
+    display: block;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-bottom: 2px solid black;
+    content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"shared\";\a   \2502          ^^^^^^^^\a   \2575 \a   task-progress.component.scss 1:9  root stylesheet";
+}

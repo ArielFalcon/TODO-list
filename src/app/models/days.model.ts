@@ -1,11 +1,11 @@
 export enum EDays {
-	Sunday = "Domingo",
-	Monday = "Lunes",
-	Tuesday = "Martes",
-	Wednesday = "Miércoles",
-	Thursday = "Jueves",
-	Friday = "Viernes",
-	Saturday = "Sábado",
+	Sunday = "dom",
+	Monday = "lun",
+	Tuesday = "mar",
+	Wednesday = "mié",
+	Thursday = "jue",
+	Friday = "vie",
+	Saturday = "sáb",
 }
 
 export interface EDayDTO {

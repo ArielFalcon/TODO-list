@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
 import {
 	MatAccordion,
 	MatExpansionPanel,
@@ -23,7 +23,8 @@ import {DatePipe} from "@angular/common";
 		DatePipe
 	],
 	templateUrl: './task-details.component.html',
-	styleUrl: './task-details.component.scss'
+	styleUrl: './task-details.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskDetailsComponent implements OnInit {
 	readonly panelOpenState = signal(false);

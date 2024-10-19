@@ -39,8 +39,8 @@ export class DaysOfTheWeek implements OnInit, AfterViewInit, OnDestroy {
   spinnerStrokeWidth!: number;
   platformService = inject(PlatformService);
   cdr = inject(ChangeDetectorRef);
-
-  @Input() progressPercentage: number = 40;
+  
+  @Input() progressPercentage: number = 80;
   @Output() _dayClicked = new EventEmitter<EDayDTO>();
   @ViewChildren('dayElement') dayElements!: QueryList<ElementRef>;
   
@@ -113,7 +113,7 @@ export class DaysOfTheWeek implements OnInit, AfterViewInit, OnDestroy {
   
   setSpinnerProps(width: number) {
       if (width > EBreakpoints.MD) {
-        this.spinnerDiameter = 60;
+        this.spinnerDiameter = 50;
         this.spinnerStrokeWidth = 6;
       } else {
         this.spinnerDiameter = 40;

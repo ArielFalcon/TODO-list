@@ -6,7 +6,7 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: rgba(17, 15, 17, 0.99);
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -6,14 +6,10 @@
          #dayElement>
 			
 			<p class="day-word">{{ day }}</p>
-			
-			@if (selectedDay === day) {
-				<mat-spinner mode="determinate" [strokeWidth]="spinnerStrokeWidth"
-				             [diameter]="spinnerDiameter" [value]="progressPercentage"
-				             class="progress-spinner">
-				</mat-spinner>
-			}
-			
+			<mat-spinner mode="determinate" [strokeWidth]="spinnerStrokeWidth"
+			             [diameter]="spinnerDiameter" [value]="progressPercentage"
+			             class="progress-spinner">
+			</mat-spinner>
 			<p class="day-number">{{ getDaysOfTheWeekDigits()[i] }}</p>
 		</div>
 	}
