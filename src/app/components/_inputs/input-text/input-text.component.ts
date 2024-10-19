@@ -1,13 +1,31 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	Input,
+} from '@angular/core';
+import {CustomInput} from '../custom-input'; // Importa la clase base
+import {NG_VALUE_ACCESSOR,} from '@angular/forms';
 
 @Component({
 	selector: 'app-input-text',
-	standalone: true,
-	imports: [],
 	templateUrl: './input-text.component.html',
-	styleUrl: './input-text.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: ['./input-text.component.scss'],
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => InputTextComponent),
+			multi: true,
+		},
+	],
+	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputTextComponent {
-
+export class InputTextComponent extends CustomInput implements AfterViewInit {
+	@Input() placeholder: string = '';
+	
+	ngAfterViewInit() {
+		console.log("after init")
+	}
 }

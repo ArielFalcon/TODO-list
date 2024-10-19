@@ -1,1 +1,8 @@
-<input type="text" autocomplete="off" name="text" class="general-input" placeholder="Username">
+<input
+  #inputElement
+	type="text"
+	[value]="value"
+	(input)="onInputChange()"
+	[placeholder]="placeholder"
+	class="general-input"
+/>

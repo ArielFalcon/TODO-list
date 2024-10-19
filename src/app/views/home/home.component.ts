@@ -7,6 +7,7 @@ import { TaskProgressComponent } from "@/components/task-progress/task-progress.
 import {ITaskDTO} from "@/models/tasks.model";
 import {InputButtonComponent} from "@/components/_inputs/input-button/input-button.component";
 import {InputTextComponent} from "@/components/_inputs/input-text/input-text.component";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ import {InputTextComponent} from "@/components/_inputs/input-text/input-text.com
 		TaskProgressComponent,
 		InputButtonComponent,
 		InputTextComponent,
+		FormsModule,
 	],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -26,6 +28,7 @@ import {InputTextComponent} from "@/components/_inputs/input-text/input-text.com
 export class HomeComponent {
   showAddTaaskForm: boolean = false;
   selectedTask?: ITaskDTO;
+	prueba: string = 'prueba';
 
   constructor() { }
 

@@ -12,8 +12,9 @@
 <app-task-form (_closed)="toggleAddTaskForm()"></app-task-form>
 }
 
-<app-input-text></app-input-text>
+<app-input-text [(ngModel)]="prueba" placeholder="colorito"></app-input-text>
 
+<p [style.color]="'red'">{{ prueba }}</p>
 @if (selectedTask) {
 	<app-task-progress [task]="selectedTask"></app-task-progress>
 }
