@@ -12,4 +12,8 @@
 	</div>
 	
 	<app-task-details [task]="task" (taskProgressChange)="handleTaskProgressChange($event)"></app-task-details>
+	<button mat-flat-button class="erase-btn">
+		Borrar
+		<span class="alert-icon">⚠️</span>
+	</button>
 </div>

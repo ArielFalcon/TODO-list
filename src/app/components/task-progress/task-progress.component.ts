@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {DatePipe, NgClass} from "@angular/common";
-import {MatMiniFabButton} from "@angular/material/button";
+import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {ITaskDTO} from "@/models/tasks.model";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
@@ -23,7 +23,8 @@ import {TaskDetailsComponent} from "@/components/task-details/task-details.compo
     MatExpansionModule,
     MatButtonToggleGroup,
     MatButtonToggle,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    MatButton
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './task-progress.component.html',
