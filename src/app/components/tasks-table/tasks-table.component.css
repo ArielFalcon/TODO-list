@@ -21,15 +21,22 @@
   display: flex;
   place-content: center;
     width: 100vw;
-    padding: 4px 0;
+    padding: 8px 0;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0 0 24px 24px;
   cursor: pointer;
-  transition: all 0.2s ease;
+    transition: all 0.4s ease;
 }
 .add-task-row:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(249, 150, 242, 0.5);
   color: #FFF;
+    padding: 12px 0;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+.add-task-row .add-task-icon {
+    font-weight: bolder;
 }
 
 /*# sourceMappingURL=tasks-table.component.css.map */
