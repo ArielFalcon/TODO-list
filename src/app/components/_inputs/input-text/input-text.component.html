@@ -1,8 +1,8 @@
 <input
   #inputElement
 	type="text"
-	[value]="value"
 	(input)="onInputChange()"
+  (blur)="onBlur()"
 	[placeholder]="placeholder"
 	class="general-input"
 />

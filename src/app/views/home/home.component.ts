@@ -40,5 +40,8 @@ export class HomeComponent {
     this.selectedTask = task;
     console.log('Task selected:', task);
   }
-
+	
+	handleTestInputChange(event: Event) {
+		console.log('Test input change:', event);
+	}
 }

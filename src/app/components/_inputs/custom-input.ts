@@ -1,15 +1,32 @@
 import {ControlValueAccessor} from '@angular/forms';
-import {Directive, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {
+	AfterViewInit,
+	Directive,
+	ElementRef,
+	HostListener,
+	ViewChild
+} from '@angular/core';
 
-// Base class for custom inputs with ngForm API support
+/*
+  Base class for custom input components.
+  Ensure that the HTML template of every component that extends CustomInput includes the #inputElement.
+  This is necessary for binding and functionality to work correctly.
+ */
 @Directive()
-export class CustomInput implements ControlValueAccessor {
+export class CustomInput implements ControlValueAccessor, AfterViewInit {
 	private onChange: (value: string) => void = () => {
 	};
 	private onTouched: () => void = () => {
 	};
 	value: string = '';
 	@ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
+	
+	ngAfterViewInit(): void {
+		// Ensure that the inputElement is defined
+		if (!this.inputElement) {
+			throw new Error('Input element not found. Ensure that the input has a template reference variable #inputElement');
+		}
+	}
 	
 	// Ensure the value is updated when the input is initialized
 	writeValue(value: any): void {
@@ -31,7 +48,6 @@ export class CustomInput implements ControlValueAccessor {
 	onInputChange(): void {
 		this.value = this.inputElement.nativeElement.value;
 		this.onChange(this.value);
-		console.log('Input value:', this.value);
 	}
 	
 	@HostListener('blur') onBlur() {
