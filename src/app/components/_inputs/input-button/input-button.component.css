@@ -12,17 +12,14 @@
     border: 2px solid #221b44;
     box-shadow: inset 2px 2px 5px #221b44, inset -2px -2px 5px #7d6baf, 2px 2px 5px #221b44, -2px -2px 5px #7d6baf;
 }
-
 .general-btn:hover {
     outline: none;
     box-shadow: inset 2px 2px 5px #7d6baf, inset -2px -2px 5px #7d6baf, 2px 2px 5px #221b44, -2px -2px 5px #221b44;
 }
-
 .general-btn .center-text {
     flex: 1;
     text-align: center;
 }
-
 .general-btn ng-content {
     margin-right: auto;
 }

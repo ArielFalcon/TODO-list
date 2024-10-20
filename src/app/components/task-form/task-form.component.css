@@ -13,17 +13,26 @@
   transform: translate(-50%, -50%);
     z-index: 999;
 }
-.task-form .form-input {
+
+.task-form .inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 24px;
+}
+
+.task-form .inputs-wrapper .form-input {
+    width: 80%;
     margin: 0 20px;
 }
 
-.task-form .form-input p {
+.task-form .inputs-wrapper .form-input p {
     color: #fff;
     font-size: 18px;
     margin: 0 0 12px 12px;
 }
 
-.task-form .form-input .textarea {
+.task-form .inputs-wrapper .form-input .textarea {
     resize: none;
     height: 15vh;
 }

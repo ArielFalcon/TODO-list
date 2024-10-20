@@ -26,14 +26,11 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  showAddTaaskForm: boolean = false;
+	showAddTaskForm: boolean = true;
   selectedTask?: ITaskDTO;
-	prueba: string = '';
-
-  constructor() { }
 
   toggleAddTaskForm() {
-    this.showAddTaaskForm = !this.showAddTaaskForm;
+	  this.showAddTaskForm = !this.showAddTaskForm;
   }
   
   onTaskSelected(task: ITaskDTO) {

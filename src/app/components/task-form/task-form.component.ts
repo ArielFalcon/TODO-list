@@ -21,6 +21,8 @@ import {Timestamp} from "firebase/firestore";
 import {ShowAlertService} from "@/services/show-alert.service";
 import {MatIcon} from "@angular/material/icon";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
+import {InputTextComponent} from "@/components/_inputs/input-text/input-text.component";
+import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-textarea.component";
 
 
 @Component({
@@ -38,6 +40,8 @@ import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-to
 		MatIcon,
 		MatButtonToggleGroup,
 		MatButtonToggle,
+		InputTextComponent,
+		InputTextareaComponent,
 	],
 	providers: [
 		provideNativeDateAdapter(),

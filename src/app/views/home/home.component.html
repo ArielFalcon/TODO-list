@@ -8,16 +8,9 @@
 <p>Error</p>
 }
 
-@if (showAddTaaskForm) {
+@if (showAddTaskForm) {
 <app-task-form (_closed)="toggleAddTaskForm()"></app-task-form>
 }
-
-<div style="width: 200px; margin-left: 400px">
-	<app-input-text [(ngModel)]="prueba" (ngModelChange)="handleTestInputChange($event)"
-	                placeholder="Título"></app-input-text>
-	<p style="color: red">{{ prueba }}</p>
-</div>
-
 
 @if (selectedTask) {
 	<app-task-progress [task]="selectedTask"></app-task-progress>

@@ -14,18 +14,26 @@
   transform: translate(-50%, -50%);
   z-index: 999;
 
-  .form-input {
-    margin: 0 20px;
+  .inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 24px;
 
-    p {
-      color: #fff;
-      font-size: 18px;
-      margin: 0 0 12px 12px;
-    }
+    .form-input {
+      width: 80%;
+      margin: 0 20px;
 
-    .textarea {
-      resize: none;
-      height: 15vh;
+      p {
+        color: #fff;
+        font-size: 18px;
+        margin: 0 0 12px 12px;
+      }
+
+      .textarea {
+        resize: none;
+        height: 15vh;
+      }
     }
   }
 

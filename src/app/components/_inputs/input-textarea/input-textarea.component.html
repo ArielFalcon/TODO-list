@@ -1,0 +1,12 @@
+<div class="container">
+	<textarea
+    #inputElement
+		(input)="onInputChange()"
+		(blur)="onBlur()"
+		class="general-input"
+		name="input-textarea"
+		required
+		id="input-textarea"
+	> </textarea>
+	<label class="label" for="input-textarea">{{ placeholder }}</label>
+</div>

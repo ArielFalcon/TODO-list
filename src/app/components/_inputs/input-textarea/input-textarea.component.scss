@@ -1,0 +1,40 @@
+@import "shared";
+
+.container {
+  position: relative;
+
+  :is(.general-input:focus, .general-input:valid) ~ label {
+    transform: translateY(-50%) scale(.9);
+    padding: 0.2em;
+    background-color: $background-color;
+    font-weight: bold;
+  }
+
+  :is(.general-input:focus, .general-input:valid) {
+    border-color: $light-primary-color;
+  }
+
+  .general-input {
+    width: 100%;
+    height: 15vh;
+    max-height: 160px;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid $gray;
+    background-color: transparent;
+    border-radius: 20px;
+    color: $white;
+    resize: none;
+  }
+
+  label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: $light-accent-color;
+  }
+}

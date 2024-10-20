@@ -16,7 +16,6 @@
     pointer-events: none;
   }
 
-
   .general-input {
     border: 0 solid transparent;
     outline: none;
@@ -39,6 +38,7 @@
       -13px -13px 100px $secondary-color;
       border: none !important;
       color: $primary-color;
+      margin-top: 40px;
 
       &::placeholder {
         color: $primary-color;
@@ -46,8 +46,7 @@
 
       & ~ .label {
         font-weight: bolder;
-        transition: 0.3s;
-        transform: translate(50%, -35px);
+        transition: all 0.3s ease;
       }
     }
 

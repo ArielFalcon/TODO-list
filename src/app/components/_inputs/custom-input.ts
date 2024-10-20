@@ -3,7 +3,7 @@ import {
 	AfterViewInit,
 	Directive,
 	ElementRef,
-	HostListener,
+	HostListener, Input,
 	ViewChild
 } from '@angular/core';
 
@@ -19,6 +19,7 @@ export class CustomInput implements ControlValueAccessor, AfterViewInit {
 	private onTouched: () => void = () => {
 	};
 	value: string = '';
+	@Input() placeholder: string = '';
 	@ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
 	
 	ngAfterViewInit(): void {

@@ -1,9 +1,7 @@
 import {
-	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	forwardRef,
-	Input,
 } from '@angular/core';
 import {CustomInput} from '../custom-input'; // Importa la clase base
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
@@ -22,12 +20,5 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputTextComponent extends CustomInput implements AfterViewInit {
-	@Input() placeholder: string = '';
-	
-	override ngAfterViewInit() {
-		super.ngAfterViewInit();
-		
-		console.log("view mounted")
-	}
+export class InputTextComponent extends CustomInput {
 }
