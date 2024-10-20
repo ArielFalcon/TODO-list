@@ -8,6 +8,7 @@ import {ITaskDTO} from "@/models/tasks.model";
 import {InputButtonComponent} from "@/components/_inputs/input-button/input-button.component";
 import {InputTextComponent} from "@/components/_inputs/input-text/input-text.component";
 import {FormsModule} from "@angular/forms";
+import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-textarea.component";
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ import {FormsModule} from "@angular/forms";
 		InputButtonComponent,
 		InputTextComponent,
 		FormsModule,
+		InputTextareaComponent,
 	],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

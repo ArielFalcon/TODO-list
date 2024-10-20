@@ -18,8 +18,8 @@ export class CustomInput implements ControlValueAccessor, AfterViewInit {
 	};
 	private onTouched: () => void = () => {
 	};
-	value: string = '';
-	@Input() placeholder: string = '';
+	value: string | null = null;
+	@Input() title: string = '';
 	@ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
 	
 	ngAfterViewInit(): void {
@@ -32,7 +32,7 @@ export class CustomInput implements ControlValueAccessor, AfterViewInit {
 	// Ensure the value is updated when the input is initialized
 	writeValue(value: any): void {
 		this.value = value;
-		if (this.inputElement) {
+		if (this.inputElement && this.value) {
 			this.inputElement.nativeElement.value = this.value;
 			//Updates the input value in the DOM
 		}
