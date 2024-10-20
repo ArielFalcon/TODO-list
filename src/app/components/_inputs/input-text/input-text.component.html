@@ -1,8 +1,13 @@
-<input
-  #inputElement
-	type="text"
-	(input)="onInputChange()"
-  (blur)="onBlur()"
-	[placeholder]="placeholder"
-	class="general-input"
-/>
+<div class="container">
+	<input
+    #inputElement
+		type="text"
+		(input)="onInputChange()"
+		(blur)="onBlur()"
+		class="general-input"
+		name="input-text"
+		required
+		id="input-text"
+	/>
+	<label class="label" for="input-text">{{ placeholder }}</label>
+</div>

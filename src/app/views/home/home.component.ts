@@ -28,7 +28,7 @@ import {FormsModule} from "@angular/forms";
 export class HomeComponent {
   showAddTaaskForm: boolean = false;
   selectedTask?: ITaskDTO;
-	prueba: string = 'prueba';
+	prueba: string = '';
 
   constructor() { }
 

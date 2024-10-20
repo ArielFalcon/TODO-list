@@ -10,7 +10,7 @@ import {
 /*
   Base class for custom input components.
   Ensure that the HTML template of every component that extends CustomInput includes the #inputElement.
-  This is necessary for binding and functionality to work correctly.
+  This implementation is necessary for binding and functionality to work correctly.
  */
 @Directive()
 export class CustomInput implements ControlValueAccessor, AfterViewInit {
