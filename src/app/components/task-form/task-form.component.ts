@@ -16,13 +16,13 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import moment from "moment";
-import {Timestamp} from "firebase/firestore";
 import {ShowAlertService} from "@/services/show-alert.service";
 import {MatIcon} from "@angular/material/icon";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {InputTextComponent} from "@/components/_inputs/input-text/input-text.component";
 import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-textarea.component";
+import {InputDatetimeComponent} from "@/components/_inputs/input-datetime/input-datetime.component";
+import {DateTime} from "luxon";
 
 
 @Component({
@@ -42,6 +42,7 @@ import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-
 		MatButtonToggle,
 		InputTextComponent,
 		InputTextareaComponent,
+		InputDatetimeComponent,
 	],
 	providers: [
 		provideNativeDateAdapter(),
@@ -65,28 +66,17 @@ export class TaskFormComponent implements OnInit{
 	    title: [null, [Validators.required]],
 	    description: [null],
       priority: [1],
-      deadline: [this.tomorrowDate, [Validators.required]],
-	    timeLimit: ['00:00'],
+      deadline: [DateTime.now().plus({minute: 1}), [Validators.required]],
       state: [EState.PENDANT, [Validators.required]],
     })
   }
-  
-  get tomorrowDate() {
-		return moment().add(1, 'days').format('YYYY-MM-DD')
-  }
-	
-	get formatDeadline(): Date {
-		const day = moment(this.taskForm.get('deadline')?.value).format("YYYY-MM-DD")
-		const time = this.taskForm.get('timeLimit')?.value
-		return new Date(`${day}T${time}`)
-	}
 	
 	get taskDTO(): ITaskDTO {
 		return {
 			title: this.taskForm.get('title')?.value,
 			description: this.taskForm.get('description')?.value,
 			priority: this.taskForm.get('priority')?.value,
-			deadline: this.formatDeadline as unknown as Timestamp,
+			deadline: this.taskForm.get('deadline')?.value,
 			state: this.taskForm.get('state')?.value,
 			goal: 0,
 			goalMetric: null,

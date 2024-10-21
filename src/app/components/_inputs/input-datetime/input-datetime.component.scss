@@ -18,6 +18,8 @@
     clear: both;
 
     #input-date-time {
+      width: 80%;
+      min-width: max-content;
       padding: 5px;
       border: 0;
       border-radius: 3px;
@@ -36,23 +38,20 @@
     }
 
     label.label {
-      color: $light-accent-color;
+      font-weight: bolder;
+      color: $white;
     }
   }
 
   .clock-visual-container {
-    position: relative;
+    width: 100%;
+    min-width: 320px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    gap: 2vh;
     align-items: center;
-    border-radius: 3px;
-    box-shadow: none;
-    font-size: 1rem;
     user-select: none;
 
     .clock-column {
-      margin-right: 32px;
       text-align: center;
       position: relative;
 
@@ -116,12 +115,7 @@
 
       .done {
         font-weight: bolder !important;
-        font-size: 1.2em;
         color: $green !important;
-      }
-
-      .clock-timer.done {
-        font-size: 2.4em;
       }
     }
   }

@@ -1,3 +1,5 @@
+@import "shared";
+
 .task-form {
   display: flex;
   flex-direction: column;
@@ -5,9 +7,9 @@
   max-width: 400px;
   margin: 0 auto;
   border-radius:  32px;
-  background: linear-gradient(145deg, #121012, #0f0e0f);
-  box-shadow: 20px 20px 41px #070607,
-  -20px -20px 41px #1b181b;
+  background: linear-gradient(180deg, $background-color, $background-color, $background-color, $secondary-color);
+  box-shadow: 20px 20px 41px $background-color,
+  -20px -20px 41px $background-color;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -19,10 +21,10 @@
     flex-direction: column;
     place-items: center;
     gap: 24px;
+    padding-top: 12px;
 
     .form-input {
       width: 80%;
-      margin: 0 20px;
 
       p {
         color: #fff;
@@ -41,7 +43,7 @@
     display: flex;
     place-content: center;
     align-items: center;
-    background-color: #800000;
+    background-color: $darker-red;
     height: 40px;
     border-radius: 32px 32px 0 0;
     margin-bottom: 12px;
@@ -49,17 +51,25 @@
     cursor: pointer;
 
     &:hover {
-      background: #9f0000;
+      background: $accent-red;
+
+      .close-icon {
+        color: $darker-red;
+      }
     }
 
     &:active {
-      background: #800000;
-      box-shadow: inset 11px 11px 22px #610000,
-      inset -11px -11px 22px #9f0000;
+      background: $darker-red;
+      box-shadow: inset 11px 11px 22px $darker-red,
+      inset -11px -11px 22px $dark-red;
+
+      .close-icon {
+        color: $white;
+      }
     }
 
     .close-icon {
-      color: #fff;
+      color: $white;
       font-size: 20px;
       font-weight: bolder;
     }

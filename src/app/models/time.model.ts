@@ -1,6 +1,6 @@
 export interface ISimpleTimeDTO {
-	days: number;
-	hours: number;
-	minutes: number;
-	seconds: number;
+	days: number | undefined;
+	hours: number | undefined;
+	minutes: number | undefined;
+	seconds: number | undefined;
 }

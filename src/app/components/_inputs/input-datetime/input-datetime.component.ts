@@ -1,10 +1,11 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  forwardRef, inject,
+  forwardRef,
+  inject,
   OnDestroy,
-  OnInit,
 } from '@angular/core';
 import {FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "@/components/_inputs/custom-input";
@@ -31,17 +32,13 @@ import {PlatformService} from "@/services/platform.service";
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputDatetimeComponent extends CustomInput implements OnInit, OnDestroy {
+export class InputDatetimeComponent extends CustomInput implements AfterViewInit, OnDestroy {
   distance!: Interval
+  todayDate : DateTime = DateTime.now();
+  private _selectedDate : DateTime = this.todayDate.endOf('day');
+  userEnteredDate: string = this.getFormattedSelectedDate();
   remainingTime!: ISimpleTimeDTO
-  todayDate !: DateTime;
-  private _selectedDate !: DateTime;
-  userEnteredDate: string = '';
   countdownInterval: any;
-  days: number = 0;
-  hours: number = 0;
-  minutes: number = 0;
-  seconds: number = 0;
   cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   platformService = inject(PlatformService)
   
@@ -49,13 +46,21 @@ export class InputDatetimeComponent extends CustomInput implements OnInit, OnDes
     return this._selectedDate;
   }
   
-  set selectedDate(value: string | DateTime) {
+  set selectedDate(value: string | DateTime | null) {
     //parses the input value to a DateTime object if needed
-    if (typeof value === 'string' && DateTime.fromISO(value).isValid) {
-      this._selectedDate = DateTime.fromISO(value);
+    if (typeof value === 'string') {
+      const parsedDate = DateTime.fromISO(value)
+      if (parsedDate.isValid) {
+        this._selectedDate = parsedDate;
+      }
     }
     if (value instanceof DateTime) {
       this._selectedDate = value;
+    }
+    
+    if (this._selectedDate) {
+      this.userEnteredDate = this.getFormattedSelectedDate();
+      this.onInputChange();
     }
   }
   
@@ -63,11 +68,14 @@ export class InputDatetimeComponent extends CustomInput implements OnInit, OnDes
     return this.selectedDate.toFormat("yyyy-LL-dd'T'HH:mm");
   }
   
-  ngOnInit() {
+  override ngAfterViewInit() {
     //Initialize default date values
-    this.todayDate = DateTime.now();
-    this.selectedDate = DateTime.now().endOf('day');
-    this.userEnteredDate = this.getFormattedSelectedDate();
+    super.ngAfterViewInit();
+    this.selectedDate = this.value;
+    
+    if (this.inputElement) {
+      this.inputElement.nativeElement.value = this.getFormattedSelectedDate();
+    }
     
     this.setClockTimer();
   }
@@ -76,14 +84,17 @@ export class InputDatetimeComponent extends CustomInput implements OnInit, OnDes
     clearInterval(this.countdownInterval);
   }
   
+  override onInputChange(): void {
+    super.onInputChange();
+    this.cdr.markForCheck();
+  }
+  
   updateClockTimer() {
   //Updates the countdown timer inside the interval
     this.updateRemainingTime();
     
     if (this.isSelectedDateDone()) {
       clearInterval(this.countdownInterval);
-    } else {
-      this.updateDOMClockTimer();
     }
     
     this.cdr.detectChanges();
@@ -102,16 +113,6 @@ export class InputDatetimeComponent extends CustomInput implements OnInit, OnDes
     this.remainingTime = {days, hours, minutes, seconds};
   }
   
-  updateDOMClockTimer(time: ISimpleTimeDTO = this.remainingTime) {
-    //Updates the linked-to-DOM values of the countdown timer
-    if (!this.isSelectedDateDone()) {
-      this.days = time.days;
-      this.hours = time.hours;
-      this.minutes = time.minutes;
-      this.seconds = time.seconds;
-    }
-  }
-  
   setClockTimer() {
     //Configures the countdown timer
     if (this.platformService.isBrowser()) {
@@ -119,8 +120,6 @@ export class InputDatetimeComponent extends CustomInput implements OnInit, OnDes
       this.selectedDate = this.userEnteredDate
       
       this.updateRemainingTime();
-      this.updateDOMClockTimer();
-      
       this.countdownInterval = setInterval(() => {
         this.updateClockTimer();
       }, 1000);
@@ -130,5 +129,6 @@ export class InputDatetimeComponent extends CustomInput implements OnInit, OnDes
   isSelectedDateDone() {
     return !this.distance?.contains(this.todayDate)
   }
+  
 }
 

@@ -4,35 +4,27 @@
 	</button>
 	<div class="inputs-wrapper">
 		<app-input-text class="form-input" formControlName="title" title="Título"></app-input-text>
+		<app-input-datetime class="form-input" title="Fecha límite" formControlName="deadline"></app-input-datetime>
 		<app-input-textarea class="form-input" formControlName="description" title="Descripción"></app-input-textarea>
+		
+		<mat-form-field class="form-input">
+			<mat-label>Estado</mat-label>
+			<mat-select formControlName="state">
+				@for (state of taskState; track $index) {
+					<mat-option [value]="state">{{state}}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+		<div class="form-input">
+			<p>Prioridad</p>
+			<mat-button-toggle-group formControlName="priority">
+				@for (priority of [1, 2, 3, 4, 5]; track $index) {
+					<mat-button-toggle [value]="priority">Nivel {{ priority }}</mat-button-toggle>
+				}
+			</mat-button-toggle-group>
+		</div>
 	</div>
-	<mat-form-field class="form-input">
-		<mat-label>Fecha Límite</mat-label>
-		<input matInput [matDatepicker]="picker" formControlName="deadline" placeholder="¿Hasta cuando tienes?">
-		<mat-hint>dd-mm-yyyy</mat-hint>
-		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-		<mat-datepicker #picker></mat-datepicker>
-	</mat-form-field>
-	<mat-form-field class="form-input">
-		<mat-label>Hora Límite</mat-label>
-		<input type="time" matInput formControlName =timeLimit>
-	</mat-form-field>
-	<mat-form-field class="form-input">
-		<mat-label>Estado</mat-label>
-		<mat-select formControlName="state">
-		@for (state of taskState; track $index) {
-			<mat-option [value]="state">{{state}}</mat-option>
-		}
-		</mat-select>
-	</mat-form-field>
-	<div class="form-input">
-		<p>Prioridad</p>
-		<mat-button-toggle-group formControlName="priority">
-			@for (priority of [1, 2, 3, 4, 5]; track $index) {
-				<mat-button-toggle [value]="priority">Nivel {{ priority }}</mat-button-toggle>
-			}
-		</mat-button-toggle-group>
-	</div>
+
 	
 	<button class="submit-btn" mat-raised-button [disabled]="taskForm.invalid" (click)="onSubmit()">Guardar</button>
 </form>
