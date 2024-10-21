@@ -93,7 +93,7 @@ export class TaskFormComponent implements OnInit, OnDestroy{
 				title: [null, [Validators.required]],
 				description: [null],
 				priority: [1],
-				deadline: ['', [Validators.required]],
+				deadline: [null, [Validators.required]],
 				state: [EState.PENDANT, [Validators.required]],
 			})
 		}
@@ -134,7 +134,6 @@ export class TaskFormComponent implements OnInit, OnDestroy{
 		if (!this.task) {
 			return;
 		}
-		console.log('taskDTO: ', this.taskDTO);
 		return this.tasksCrud.updateTask(this.task.id, this.taskDTO)
 	}
 	
