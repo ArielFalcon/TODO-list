@@ -8,6 +8,7 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
 	selector: 'app-input-text',
+	standalone: true,
 	templateUrl: './input-text.component.html',
 	styleUrls: ['./input-text.component.scss'],
 	providers: [
@@ -17,7 +18,6 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 			multi: true,
 		},
 	],
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputTextComponent extends CustomInput {

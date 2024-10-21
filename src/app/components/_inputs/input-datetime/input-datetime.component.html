@@ -1,0 +1,43 @@
+@let isDone = isSelectedDateDone();
+@let renderedDay= isDone ? 'D': days;
+@let renderedHours= isDone ? 'O': hours;
+@let renderedMinutes= isDone ? 'N': minutes;
+@let renderedSeconds= isDone ? 'E': seconds;
+
+<div class="container">
+	<div class="clock-input-container" #inputElement>
+		<label class="label" for="input-date-time">{{ title }}</label>
+		<input
+			type="datetime-local"
+			name="input-date-time"
+			class="general-input"
+			id="input-date-time"
+			(input)="onInputChange()"
+			(blur)="onBlur()"
+			[(ngModel)]="userEnteredDate"
+			(ngModelChange)="setClockTimer()"
+		/>
+	</div>
+	<div class="clock-visual-container">
+		<div class="clock-column">
+			<p class="clock-day clock-timer" [ngClass]="isDone ? 'done' : 'pendant'">{{ renderedDay }}</p>
+			<p class="clock-label" [ngClass]="{'done': days === 0}">Días</p>
+		</div>
+		
+		<div class="clock-column">
+			<p class="clock-hours clock-timer" [ngClass]="isDone ? 'done' : 'pendant'">{{ renderedHours }}</p>
+			<p class="clock-label" [ngClass]="{'done': (days === 0 && hours === 0) || isDone}">Horas</p>
+		</div>
+		
+		<div class="clock-column">
+			<p class="clock-minutes clock-timer" [ngClass]="isDone ? 'done' : 'pendant'">{{ renderedMinutes }}</p>
+			<p class="clock-label" [ngClass]="{'done': (days === 0 && hours === 0 && minutes === 0) || isDone}">Minutos</p>
+		</div>
+		
+		<div class="clock-column">
+			<p class="clock-seconds clock-timer" [ngClass]="isDone ? 'done' : 'pendant'">{{ renderedSeconds }}</p>
+			<p class="clock-label" [ngClass]="{'done': isDone}">Segundos</p>
+		</div>
+	</div>
+</div>
+

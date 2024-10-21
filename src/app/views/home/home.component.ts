@@ -9,6 +9,7 @@ import {InputButtonComponent} from "@/components/_inputs/input-button/input-butt
 import {InputTextComponent} from "@/components/_inputs/input-text/input-text.component";
 import {FormsModule} from "@angular/forms";
 import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-textarea.component";
+import {InputDatetimeComponent} from "@/components/_inputs/input-datetime/input-datetime.component";
 
 @Component({
   selector: 'app-home',
@@ -23,12 +24,13 @@ import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-
 		InputTextComponent,
 		FormsModule,
 		InputTextareaComponent,
+		InputDatetimeComponent,
 	],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-	showAddTaskForm: boolean = true;
+	showAddTaskForm: boolean = false
   selectedTask?: ITaskDTO;
 
   toggleAddTaskForm() {
@@ -39,8 +41,4 @@ export class HomeComponent {
     this.selectedTask = task;
     console.log('Task selected:', task);
   }
-	
-	handleTestInputChange(event: Event) {
-		console.log('Test input change:', event);
-	}
 }

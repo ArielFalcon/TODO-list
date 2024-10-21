@@ -1,0 +1,137 @@
+@import "shared";
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  margin: 0;
+  gap: 2vh;
+
+  .clock-input-container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 1vh;
+    clear: both;
+
+    #input-date-time {
+      padding: 5px;
+      border: 0;
+      border-radius: 3px;
+      font-size: 16px;
+      font-family: monospace;
+      text-align: center;
+      color: $primary-color;
+      background-color: $light-accent-color;
+
+      &:focus, &:active {
+        outline: none;
+        transform: scale(1.05);
+        box-shadow: 2px 2px 12px $dark-accent-color,
+        -2px -2px 12px $accent-color;
+      }
+    }
+
+    label.label {
+      color: $light-accent-color;
+    }
+  }
+
+  .clock-visual-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: none;
+    font-size: 1rem;
+    user-select: none;
+
+    .clock-column {
+      margin-right: 32px;
+      text-align: center;
+      position: relative;
+
+      &::after {
+        content: ':';
+        display: block;
+        height: .25rem;
+        width: .25rem;
+        font-size: 36px;
+        font-weight: 200;
+        color: $white;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 10%;
+        right: -30%;
+      }
+
+      &:last-child {
+        margin-right: 0;
+        &::after {
+          display: none;
+        }
+      }
+
+      &:focus, &:hover, &:active {
+        &::after {
+          animation: blink 1.5s infinite;
+        }
+      }
+
+      .clock-timer {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2rem;
+        line-height: 1;
+        margin: 0 0 8px 0;
+
+        &:hover, &.focus {
+          color: $light-accent-color;
+          transform: scale(1.1);
+        }
+      }
+
+      .clock-label {
+        padding-top: 10px;
+        text-transform: uppercase;
+        font-size: 1em;
+        text-align: center;
+        border-top: 1px solid $white;
+        color: $white;
+
+        &:hover {
+          color: $light-accent-color;
+          font-weight: 100;
+        }
+
+      }
+
+      .pendant {
+        color: $accent-color;
+      }
+
+      .done {
+        font-weight: bolder !important;
+        font-size: 1.2em;
+        color: $green !important;
+      }
+
+      .clock-timer.done {
+        font-size: 2.4em;
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
