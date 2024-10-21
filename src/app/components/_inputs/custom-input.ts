@@ -27,6 +27,8 @@ export class CustomInput implements ControlValueAccessor, AfterViewInit {
 		if (!this.inputElement) {
 			throw new Error('Input element not found. Ensure that the input has a template reference variable #inputElement');
 		}
+		
+		this.inputElement.nativeElement.value = this.value ?? '';
 	}
 	
 	// Ensure the value is updated when the input is initialized

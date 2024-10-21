@@ -4,7 +4,7 @@ import {
 	forwardRef,
 } from '@angular/core';
 import {CustomInput} from '../custom-input'; // Importa la clase base
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
 	selector: 'app-input-text',
@@ -19,6 +19,9 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 		},
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [
+		FormsModule
+	]
 })
 export class InputTextComponent extends CustomInput {
 }

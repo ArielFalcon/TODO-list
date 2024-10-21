@@ -39,3 +39,5 @@
 	Crear tarea
 	<mat-icon class="add-task-icon">add</mat-icon>
 </p>
+
+<app-task-form *ngIf="selectedTaskValue && updateTask" [task]="selectedTaskValue" (_closed)="updateTask = false"></app-task-form>

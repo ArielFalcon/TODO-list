@@ -15,6 +15,7 @@ export interface IInputData {
 
 interface IAction {
   title: string;
+  showAlert: boolean;
   handler?: (param: unknown) => Observable<unknown>;
 }
 
@@ -41,10 +42,9 @@ export class BottomSheetComponent {
 
   handleClick($event: MouseEvent, element: IAction): void {
     if (element.handler) {
-      console.log(element)
       element.handler(this.data.element.id).subscribe(
         () => {
-          this.alertService.showAlert("Hecho!");
+          if (element.showAlert) this.alertService.showAlert("Hecho!");
         },
         (error: Error) => {
           this.alertService.showAlert(error.message);

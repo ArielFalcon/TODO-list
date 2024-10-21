@@ -80,6 +80,7 @@ export class TaskFormComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
 		if (this.task) {
 			const deadline = this.task.deadline ? DateTime.fromISO(this.task.deadline) : '';
+			console.log('tarea input: ',this.task);
 			this.taskForm = this.formBuilder.group({
 				title: [this.task.title, [Validators.required]],
 				description: [this.task.description],

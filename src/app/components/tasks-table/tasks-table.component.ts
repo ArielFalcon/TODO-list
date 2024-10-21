@@ -10,17 +10,18 @@ import {
 } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ETaskTableColumns, ITask } from "@/models/tasks.model";
-import {AsyncPipe, DatePipe} from "@angular/common";
+import {AsyncPipe, DatePipe, NgIf} from "@angular/common";
 import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListItem, MatNavList } from "@angular/material/list";
 import { MatLine } from "@angular/material/core";
 import { BottomSheetComponent } from "../bottom-sheet/bottom-sheet.component";
 import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {TasksCrudService} from "@/services/tasks-crud.service";
 import {InputButtonComponent} from "@/components/_inputs/input-button/input-button.component";
 import {DateFormatPipe} from "@/pipes/date-format.pipe";
+import {TaskFormComponent} from "@/components/task-form/task-form.component";
 
 @Component({
   selector: 'app-task-table',
@@ -38,6 +39,8 @@ import {DateFormatPipe} from "@/pipes/date-format.pipe";
     AsyncPipe,
     InputButtonComponent,
     DateFormatPipe,
+    TaskFormComponent,
+    NgIf,
   ],
   templateUrl: './tasks-table.component.html',
   styleUrl: './tasks-table.component.scss',
@@ -52,6 +55,7 @@ export class TaskTableComponent implements OnInit{
   @Output() _addTask = new EventEmitter<boolean>();
   @Output() _selectedTask = new EventEmitter<ITask>();
   cdr = inject(ChangeDetectorRef);
+  updateTask: boolean = false;
   
   constructor(private tasksCrud:TasksCrudService){}
   
@@ -65,9 +69,14 @@ export class TaskTableComponent implements OnInit{
     )
   }
 
-  onClickRow(row: ITask): void {
-    this.selectedTask.set(row)
-    this._selectedTask.emit(row)
+  onClickRow(task: ITask, update: boolean = false): Observable<ITask> | void{
+    this.updateTask = update
+    this.selectedTask.set(task)
+    this._selectedTask.emit(task)
+    
+    if (update) {
+      return of(task)
+    }
   }
   
   onAddTaskClick(): void {
@@ -81,12 +90,17 @@ export class TaskTableComponent implements OnInit{
         actions: [
           {
             title: 'Borrar',
+            showAlert: true,
             handler: () => {
               return this.tasksCrud.deleteTask(element.id)
             }
           },
           {
             title: 'Editar',
+            showAlert: false,
+            handler: () => {
+              return this.onClickRow(element, true)
+            }
           }
         ],
         element,
