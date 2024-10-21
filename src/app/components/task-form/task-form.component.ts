@@ -25,7 +25,7 @@ import {InputTextComponent} from "@/components/_inputs/input-text/input-text.com
 import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-textarea.component";
 import {InputDatetimeComponent} from "@/components/_inputs/input-datetime/input-datetime.component";
 import {DateTime} from "luxon";
-import {Subject, takeUntil} from 'rxjs';
+import {Observable, Subject, takeUntil} from 'rxjs';
 
 
 @Component({
@@ -106,29 +106,17 @@ export class TaskFormComponent implements OnInit, OnDestroy{
 	
   
   onSubmit() {
-	  this.tasksCrud.addTask(this.taskDTO)
-		  .pipe(takeUntil(this.destroy$))
-		  .subscribe(
-			  () => {
-				  this.alertService.showAlert('Tarea añadida');
-				  this.taskForm.reset();
-				  this._closed.emit(true);
-			  },
-			  (error: Error) => {
-				  this.alertService.showAlert(error.message);
-			  }
-		  );
-  }
-	
-	onUpdate() {
-		if (!this.task) {
-			return;
+		let res: Observable<unknown> | undefined;
+		if (this.task) {
+			res =this.updateTask();
+		} else {
+		res =	this.addTask();
 		}
-		this.tasksCrud.updateTask(this.task.id, this.taskDTO)
-			.pipe(takeUntil(this.destroy$))
+		
+		res?.pipe(takeUntil(this.destroy$))
 			.subscribe(
 				() => {
-					this.alertService.showAlert('Tarea actualizada');
+					this.alertService.showAlert(this.task ? 'Tarea actualizada' : 'Tarea creada');
 					this.taskForm.reset();
 					this._closed.emit(true);
 				},
@@ -136,6 +124,18 @@ export class TaskFormComponent implements OnInit, OnDestroy{
 					this.alertService.showAlert(error.message);
 				}
 			);
+  }
+	
+	addTask() {
+		return this.tasksCrud.addTask(this.taskDTO)
+	}
+	
+	updateTask() {
+		if (!this.task) {
+			return;
+		}
+		console.log('taskDTO: ', this.taskDTO);
+		return this.tasksCrud.updateTask(this.task.id, this.taskDTO)
 	}
 	
 	closeForm() {
