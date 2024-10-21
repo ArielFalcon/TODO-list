@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import {addDoc, collection, collectionData, deleteDoc, doc, Firestore} from "@angular/fire/firestore";
+import {addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc} from "@angular/fire/firestore";
 import {ITaskDTO} from "@/models/tasks.model";
 import {from} from "rxjs";
 
@@ -19,6 +19,11 @@ export class TasksCrudService {
   
   addTask(task: ITaskDTO) {
     return from(addDoc(this.getCollection, task));
+  }
+  
+  updateTask(id: string, task: ITaskDTO) {
+    const taskDoc = doc(this.firestore, `tasks/${id}`);
+    return from(updateDoc(taskDoc, {task}));
   }
   
   deleteTask(id: string) {

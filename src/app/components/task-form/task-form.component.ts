@@ -3,11 +3,13 @@ import {
 	Component,
 	EventEmitter,
 	inject,
+	Input,
+	OnDestroy,
 	OnInit,
 	Output
 } from '@angular/core';
 import {TasksCrudService} from "@/services/tasks-crud.service";
-import {EState, ITaskDTO} from "@/models/tasks.model";
+import {EState, ITask, ITaskDTO} from "@/models/tasks.model";
 import {MatButton} from "@angular/material/button";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
@@ -23,6 +25,7 @@ import {InputTextComponent} from "@/components/_inputs/input-text/input-text.com
 import {InputTextareaComponent} from "@/components/_inputs/input-textarea/input-textarea.component";
 import {InputDatetimeComponent} from "@/components/_inputs/input-datetime/input-datetime.component";
 import {DateTime} from "luxon";
+import {Subject, takeUntil} from 'rxjs';
 
 
 @Component({
@@ -51,26 +54,16 @@ import {DateTime} from "luxon";
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss'
 })
-export class TaskFormComponent implements OnInit{
+export class TaskFormComponent implements OnInit, OnDestroy{
   public taskForm!: FormGroup;
   readonly taskState = Object.values(EState);
 	private tasksCrud = inject(TasksCrudService);
 	private formBuilder = inject(FormBuilder);
 	private alertService = inject(ShowAlertService);
+	private destroy$ = new Subject<void>();
 	@Output() _closed = new EventEmitter<boolean>();
-	
-	constructor() {}
+	@Input() task: ITask | null = null;
   
-  ngOnInit(): void {
-    this.taskForm = this.formBuilder.group({
-	    title: [null, [Validators.required]],
-	    description: [null],
-      priority: [1],
-      deadline: [DateTime.now().plus({minute: 1}), [Validators.required]],
-      state: [EState.PENDANT, [Validators.required]],
-    })
-  }
-	
 	get taskDTO(): ITaskDTO {
 		return {
 			title: this.taskForm.get('title')?.value,
@@ -83,19 +76,66 @@ export class TaskFormComponent implements OnInit{
 			frequency: null, /*TODO recibir datos*/
 		}
 	}
+	
+  ngOnInit(): void {
+		if (this.task) {
+			const deadline = this.task.deadline ? DateTime.fromISO(this.task.deadline) : '';
+			this.taskForm = this.formBuilder.group({
+				title: [this.task.title, [Validators.required]],
+				description: [this.task.description],
+				priority: [this.task.priority],
+				deadline: [deadline, [Validators.required]],
+				state: [this.task.state, [Validators.required]],
+			})
+		} else {
+			this.taskForm = this.formBuilder.group({
+				title: [null, [Validators.required]],
+				description: [null],
+				priority: [1],
+				deadline: ['', [Validators.required]],
+				state: [EState.PENDANT, [Validators.required]],
+			})
+		}
+  }
+	
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
+	
   
   onSubmit() {
-    this.tasksCrud.addTask(this.taskDTO).subscribe(
-      () => {
-	      this.alertService.showAlert('Tarea añadida');
-	      this.taskForm.reset();
-	      this._closed.emit(true);
-      },
-	      (error: Error) => {
-					this.alertService.showAlert(error.message)
-			}
-    )
+	  this.tasksCrud.addTask(this.taskDTO)
+		  .pipe(takeUntil(this.destroy$))
+		  .subscribe(
+			  () => {
+				  this.alertService.showAlert('Tarea añadida');
+				  this.taskForm.reset();
+				  this._closed.emit(true);
+			  },
+			  (error: Error) => {
+				  this.alertService.showAlert(error.message);
+			  }
+		  );
   }
+	
+	onUpdate() {
+		if (!this.task) {
+			return;
+		}
+		this.tasksCrud.updateTask(this.task.id, this.taskDTO)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(
+				() => {
+					this.alertService.showAlert('Tarea actualizada');
+					this.taskForm.reset();
+					this._closed.emit(true);
+				},
+				(error: Error) => {
+					this.alertService.showAlert(error.message);
+				}
+			);
+	}
 	
 	closeForm() {
 		this._closed.emit(true);

@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   EventEmitter,
   inject,
@@ -20,6 +20,7 @@ import { MatIcon } from "@angular/material/icon";
 import {Observable} from "rxjs";
 import {TasksCrudService} from "@/services/tasks-crud.service";
 import {InputButtonComponent} from "@/components/_inputs/input-button/input-button.component";
+import {DateFormatPipe} from "@/pipes/date-format.pipe";
 
 @Component({
   selector: 'app-task-table',
@@ -36,6 +37,7 @@ import {InputButtonComponent} from "@/components/_inputs/input-button/input-butt
     MatIcon,
     AsyncPipe,
     InputButtonComponent,
+    DateFormatPipe,
   ],
   templateUrl: './tasks-table.component.html',
   styleUrl: './tasks-table.component.scss',
@@ -49,6 +51,7 @@ export class TaskTableComponent implements OnInit{
   private _bottomSheet = inject(MatBottomSheet);
   @Output() _addTask = new EventEmitter<boolean>();
   @Output() _selectedTask = new EventEmitter<ITask>();
+  cdr = inject(ChangeDetectorRef);
   
   constructor(private tasksCrud:TasksCrudService){}
   
@@ -57,6 +60,7 @@ export class TaskTableComponent implements OnInit{
     this.tasks$.subscribe(
       (tasks: ITask[]) => {
         this.dataSource = tasks
+        this.cdr.detectChanges()
       }
     )
   }

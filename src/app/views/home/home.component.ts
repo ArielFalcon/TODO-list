@@ -30,7 +30,7 @@ import {InputDatetimeComponent} from "@/components/_inputs/input-datetime/input-
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-	showAddTaskForm: boolean = true;
+	showAddTaskForm: boolean = false;
   selectedTask?: ITaskDTO;
 
   toggleAddTaskForm() {

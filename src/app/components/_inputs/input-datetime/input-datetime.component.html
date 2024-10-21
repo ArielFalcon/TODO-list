@@ -1,8 +1,8 @@
 @let isDone = isSelectedDateDone();
-@let rDay= isDone ? 'D': remainingTime?.days;
-@let rHours= isDone ? 'O': remainingTime?.hours;
-@let rMinutes= isDone ? 'N': remainingTime?.minutes;
-@let rSeconds= isDone ? 'E': remainingTime?.seconds;
+@let rDay= isDone ? 'D': remainingTime.days;
+@let rHours= isDone ? 'O': remainingTime.hours;
+@let rMinutes= isDone ? 'N': remainingTime.minutes;
+@let rSeconds= isDone ? 'E': remainingTime.seconds;
 
 <div class="container">
 	<div class="clock-input-container">
@@ -22,17 +22,17 @@
 	<div class="clock-visual-container">
 		<div class="clock-column">
 			<p class="clock-day clock-timer" [ngClass]="isDone ? 'done' : 'pendant'">{{ rDay }}</p>
-			<p class="clock-label" [ngClass]="{'done': (remainingTime?.days === 0) || isDone}">Días</p>
+			<p class="clock-label" [ngClass]="{'done': (remainingTime.days === 0) || isDone}">Días</p>
 		</div>
 		
 		<div class="clock-column">
 			<p class="clock-hours clock-timer" [ngClass]="isDone ? 'done' : 'pendant'">{{ rHours }}</p>
-			<p class="clock-label" [ngClass]="{'done': (remainingTime?.days === 0 && remainingTime?.hours === 0) || isDone}">Horas</p>
+			<p class="clock-label" [ngClass]="{'done': (remainingTime.days === 0 && remainingTime.hours === 0) || isDone}">Horas</p>
 		</div>
 		
 		<div class="clock-column">
 			<p class="clock-minutes clock-timer" [ngClass]="isDone ? 'done' : 'pendant'">{{ rMinutes }}</p>
-			<p class="clock-label" [ngClass]="{'done': (remainingTime?.days === 0 && remainingTime?.hours === 0 && remainingTime?.minutes === 0) || isDone}">Minutos</p>
+			<p class="clock-label" [ngClass]="{'done': (remainingTime.days === 0 && remainingTime.hours === 0 && remainingTime.minutes === 0) || isDone}">Minutos</p>
 		</div>
 		
 		<div class="clock-column">

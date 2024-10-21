@@ -13,7 +13,7 @@
 
   <ng-container [matColumnDef]="displayedColumns[2]">
     <th mat-header-cell *matHeaderCellDef>Fecha Límite</th>
-    <td mat-cell *matCellDef="let element">{{element.deadline?.toDate() | date:"dd/MM/yyy HH:mm:ss" }} </td>
+    <td mat-cell *matCellDef="let element">{{element.deadline | dateFormat }} </td>
   </ng-container>
 
   <ng-container [matColumnDef]="displayedColumns[3]">

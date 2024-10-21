@@ -1,10 +1,8 @@
-import { Timestamp } from 'firebase/firestore';
-
 export interface ITaskDTO {
 	title: string;
 	description: string | null;
 	priority: number | null;
-	deadline: Timestamp | null;
+	deadline: string | null;
 	state: EState | null;
 	goal: number | null;
 	goalMetric: EGoalMetrics | null;
@@ -41,17 +39,4 @@ export enum ETaskTableColumns {
 	DEADLINE = 'deadline',
 	STATE = 'state',
 	ACTION = 'action',
-}
-
-export class Task implements ITaskDTO {
-	constructor(
-		public title: string = '',
-		public description:string|null = "Estudiar bases de datos desde el inicio, instalar MySQL y trabajar con la consola de comandos.",
-		public priority: number = 0,
-		public deadline: Timestamp = Timestamp.now(),
-		public state: EState = EState.PENDANT,
-		public goal: number = 0,
-		public goalMetric: EGoalMetrics = EGoalMetrics.TIMES,
-		public frequency: EFrequency = EFrequency.DAILY,
-	) {}
 }

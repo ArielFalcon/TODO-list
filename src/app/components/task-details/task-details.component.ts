@@ -8,6 +8,7 @@ import {
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {EState, ITaskDTO} from "@/models/tasks.model";
 import {DatePipe} from "@angular/common";
+import {DateFormatPipe} from "@/pipes/date-format.pipe";
 
 @Component({
 	selector: 'app-task-details',
@@ -20,7 +21,8 @@ import {DatePipe} from "@angular/common";
 		MatExpansionPanelTitle,
 		MatButtonToggleGroup,
 		MatButtonToggle,
-		DatePipe
+		DatePipe,
+		DateFormatPipe
 	],
 	templateUrl: './task-details.component.html',
 	styleUrl: './task-details.component.scss',
@@ -40,6 +42,7 @@ export class TaskDetailsComponent implements OnInit {
 	
 	ngOnInit() {
 		this.previousProgressPercentage = this.progressPercentage;
+		console.log('Task:', this.task);
 	}
 	
 	onStateChange(state: EState) {

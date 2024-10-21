@@ -5,7 +5,7 @@ import {
   Component,
   forwardRef,
   inject,
-  OnDestroy,
+  OnDestroy, OnInit,
 } from '@angular/core';
 import {FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CustomInput} from "@/components/_inputs/custom-input";
@@ -32,7 +32,7 @@ import {PlatformService} from "@/services/platform.service";
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputDatetimeComponent extends CustomInput implements AfterViewInit, OnDestroy {
+export class InputDatetimeComponent extends CustomInput implements OnInit, AfterViewInit, OnDestroy {
   distance!: Interval
   todayDate : DateTime = DateTime.now();
   private _selectedDate : DateTime = this.todayDate.endOf('day');
@@ -66,6 +66,10 @@ export class InputDatetimeComponent extends CustomInput implements AfterViewInit
   
   getFormattedSelectedDate(): string {
     return this.selectedDate.toFormat("yyyy-LL-dd'T'HH:mm");
+  }
+  
+  ngOnInit() {
+    this.updateRemainingTime()
   }
   
   override ngAfterViewInit() {

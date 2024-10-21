@@ -24,7 +24,7 @@
 			<article class="task-details-row">
 				<p>Fecha límite</p>
 				<p>{{
-            task.deadline?.toDate() | date:"dd/MM/yyyy HH:mm:ss"
+            task.deadline | dateFormat:'dd/MM/yyyy HH:mm'
             ?? "Se valía elegir una!"
 					}}</p>
 			</article>
