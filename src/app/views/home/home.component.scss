@@ -1,18 +1,10 @@
-.demo-table {
-  width: 100%;
-}
+.container {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 1vh;
 
-.mat-mdc-row .mat-mdc-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-}
-
-.mat-mdc-row:hover .mat-mdc-cell {
-  border-color: currentColor;
-  transition: all 0.3s ease;
-}
-
-.demo-row-is-clicked {
-  font-weight: bold;
+  .table-component {
+    width: 55vw
+  }
 }

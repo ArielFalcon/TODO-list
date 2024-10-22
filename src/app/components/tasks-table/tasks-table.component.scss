@@ -1,53 +1,59 @@
 @import "shared";
-.task-table {
+
+.container {
   width: 100%;
 
-  .mat-mdc-row {
-    background-color: transparent;
-    transition: all 0.1s linear;
-    border: none;
+  .task-table {
+    .mat-mdc-row {
+      background-color: transparent;
+      transition: all 0.1s linear;
+      border: none;
+
+      &:hover {
+        box-shadow:  10px 10px 18px $background-color,
+        -5px -5px 22px transparentize($primary-color, 0.3);
+        transform: scale(1.02);
+
+        font-weight: bolder;
+      }
+
+      .mat-mdc-cell {
+        border: none;
+        cursor: pointer;
+      }
+    }
+
+    .row-is-clicked {
+      font-weight: bold;
+      box-shadow:  11px 11px 22px #060606,
+      -11px -11px 22px #18161a;
+      transform: scale(1.02);
+    }
+  }
+
+  .add-task-row {
+    display: flex;
+    place-content: center;
+    width: 100%;
+    padding: 8px 0;
+    background-color: transparentize($white, 0.7);
+    border-radius: 0 0 24px 24px;
+    cursor: pointer;
+    transition: all 0.4s ease;
 
     &:hover {
-      background-color: transparentize($primary-color, 0.1);
-      box-shadow: inset 11px 11px 22px $background-color,
-      inset -11px -11px 22px $background-color;
-      transform: scale(0.99);
+      background-color: transparentize($primary-color, 0.6);
+      color: #FFF;
+      padding: 12px 0;
+      font-weight: bolder;
+      font-size: 1.2rem;
     }
 
-    .mat-mdc-cell {
-      border: none;
-      cursor: pointer;
+    .add-task-icon {
+      font-weight: bolder;
     }
   }
 
-  .row-is-clicked {
-    font-weight: bolder;
-    box-shadow:  11px 11px 22px $background-color,
-    -11px -11px 22px transparentize($secondary-color, 0.5);
-    transform: scale(1.02);
-  }
 }
 
-.add-task-row {
-  display: flex;
-  place-content: center;
-  width: 100%;
-  padding: 8px 0;
-  background-color: transparentize($white, 0.7);
-  border-radius: 0 0 24px 24px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-
-  &:hover {
-    background-color: transparentize($primary-color, 0.6);
-    color: #FFF;
-    padding: 12px 0;
-    font-weight: bolder;
-    font-size: 1.2rem;
-  }
-
-  .add-task-icon {
-    font-weight: bolder;
-  }
-}
 

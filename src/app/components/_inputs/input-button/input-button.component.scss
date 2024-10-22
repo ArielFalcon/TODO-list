@@ -38,7 +38,7 @@
   }
 
   &:hover, &:active {
-    color: #1e1e2b;
+    color: $white;
     transition-delay: 0.4s;
 
     &::before {
@@ -50,5 +50,9 @@
       transition-delay: 0.3s;
       color: $white;
     }
+  }
+
+  .center-text {
+    color: $light-primary-color;
   }
 }
