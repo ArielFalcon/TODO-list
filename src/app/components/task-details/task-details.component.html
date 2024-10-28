@@ -1,3 +1,5 @@
+@let task = this.task();
+
 <div class="details">
 	<mat-accordion>
 		<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -25,7 +27,6 @@
 				<p>Fecha límite</p>
 				<p>{{
             task.deadline | dateFormat:'dd/MM/yyyy HH:mm'
-            ?? "Se valía elegir una!"
 					}}</p>
 			</article>
 			<article class="task-details-row">

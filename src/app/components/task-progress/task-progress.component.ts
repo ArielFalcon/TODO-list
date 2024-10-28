@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, Input, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, input, InputSignal, OnInit, signal} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
@@ -19,22 +19,22 @@ import {TaskDetailsComponent} from "@/components/task-details/task-details.compo
     MatButtonToggleGroup,
     MatButtonToggle,
     TaskDetailsComponent,
-    MatButton
+    MatButton,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './task-progress.component.html',
   styleUrls: ['./task-progress.component.scss']
 })
 export class TaskProgressComponent implements OnInit{
-  @Input() task!: ITaskDTO;
+  task: InputSignal<ITaskDTO> = input.required<ITaskDTO>();
   private readonly maxProgress = 100;
-  _progressPercentage = signal(this.task.percentage);
+  _progressPercentage = signal(this.task().percentage);
   previousProgressPercentage = signal(0);
-  percentageStep = computed(() => Math.round(this.task.goal ? 100 / this.task.goal : 100));
-  progressIndicator = computed(() => `${Math.round(this.progressPercentage / this.percentageStep())}/${this.task.goal}`);
+  percentageStep = computed(() => Math.round(100 / (this.task().goal ?? 100)));
+  progressIndicator = computed(() => `${Math.round(this.progressPercentage / this.percentageStep())}/${this.task().goal}`);
   
   ngOnInit() {
-    this.previousProgressPercentage.set(this.task.percentage);
+    this.previousProgressPercentage.set(this.task().percentage);
   }
   
   get progressPercentage() {
@@ -43,10 +43,10 @@ export class TaskProgressComponent implements OnInit{
   
   set progressPercentage(value: number) {
     if(value >= 0 && value <= 100) {
-      this.task.percentage = value;
+      this.task().percentage = value;
     }
     if (value >= 100) {
-      this.task.percentage = 100;
+      this.task().percentage = 100;
     }
   }
   

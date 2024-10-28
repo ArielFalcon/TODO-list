@@ -4,15 +4,15 @@
 			<mat-icon>remove</mat-icon>
 		</button>
 		<div class="progress-bar" [style.width.%]="progressPercentage"  [ngClass]="progressColor">
-			<p class="task-progress">{{ task.title }}</p>
+			<p class="task-progress">{{ task().title }}</p>
 		</div>
 		<button mat-mini-fab class="control-btn increment" (click)="increment()" [disabled]="progressPercentage === 100">
 			<mat-icon>{{progressPercentage === 100 ? 'done':'add'}}</mat-icon>
 		</button>
 	</div>
-	<p class="progress-indicator">	{{ progressIndicator }} </p>
+	<p class="progress-indicator">	{{ progressIndicator() }} </p>
 	
-	<app-task-details [task]="task" (taskProgressChange)="handleTaskProgressChange($event)"></app-task-details>
+	<app-task-details [task]="task()" (taskProgressChange)="handleTaskProgressChange($event)"></app-task-details>
 	<button mat-flat-button class="erase-btn">
 		Borrar
 		<span class="alert-icon">⚠️</span>

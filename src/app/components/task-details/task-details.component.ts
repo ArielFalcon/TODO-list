@@ -1,4 +1,13 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, signal} from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	input,
+	InputSignal,
+	OnInit,
+	output,
+	OutputEmitterRef,
+	signal
+} from '@angular/core';
 import {
 	MatAccordion,
 	MatExpansionPanel,
@@ -30,18 +39,17 @@ import {DateFormatPipe} from "@/pipes/date-format.pipe";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskDetailsComponent implements OnInit {
+	task: InputSignal<ITaskDTO> = input.required<ITaskDTO>();
+  previousProgressPercentage = input(this.task().percentage);
 	readonly panelOpenState = signal(false);
-  @Input()  	previousProgressPercentage = 0;
 	taskPosibleStates !: EState[]
-	@Input() task!: ITaskDTO;
-	@Output() taskProgressChange = new EventEmitter<number>();
+  taskProgressChange: OutputEmitterRef<number> = output()
 	
 	constructor() {
 		this.taskPosibleStates = Object.values(EState)
 	}
 	
 	ngOnInit() {
-		this.previousProgressPercentage = this.task.percentage;
 		console.log('Task:', this.task);
 	}
 	
@@ -52,7 +60,7 @@ export class TaskDetailsComponent implements OnInit {
 			this.taskProgressChange.emit(0);
 		}
 		else {
-			this.taskProgressChange.emit(this.previousProgressPercentage);
+			this.taskProgressChange.emit(this.previousProgressPercentage());
 		}
 	}
 	
