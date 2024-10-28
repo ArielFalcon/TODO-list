@@ -22,6 +22,7 @@ import {TasksCrudService} from "@/services/tasks-crud.service";
 import {InputButtonComponent} from "@/components/_inputs/input-button/input-button.component";
 import {DateFormatPipe} from "@/pipes/date-format.pipe";
 import {TaskFormComponent} from "@/components/task-form/task-form.component";
+import {TaskDataService} from "@/services/task-data.service";
 
 @Component({
   selector: 'app-task-table',
@@ -47,17 +48,26 @@ import {TaskFormComponent} from "@/components/task-form/task-form.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskTableComponent implements OnInit{
-  tasks$ !: Observable<ITask[]>
-  displayedColumns: ETaskTableColumns[] = [ETaskTableColumns.PRIORITY, ETaskTableColumns.TITLE, ETaskTableColumns.DEADLINE, ETaskTableColumns.STATE, ETaskTableColumns.ACTION];
-  dataSource !: ITask[]
-  selectedTask: WritableSignal<ITask | null> = signal(null);
+  private cdr : ChangeDetectorRef = inject(ChangeDetectorRef);
   private _bottomSheet = inject(MatBottomSheet);
+  private taskService: TaskDataService = inject(TaskDataService);
+  private tasksCrud: TasksCrudService = inject(TasksCrudService);
+  displayedColumns: ETaskTableColumns[] =
+    [
+    ETaskTableColumns.PRIORITY,
+    ETaskTableColumns.TITLE,
+    ETaskTableColumns.DEADLINE,
+    ETaskTableColumns.STATE,
+    ETaskTableColumns.ACTION
+    ];
+  tasks$ !: Observable<ITask[]>
+  dataSource !: ITask[]
+  updateTask: boolean = false;
+  selectedTask: WritableSignal<ITask | null> = signal(null);
   @Output() _addTask = new EventEmitter<boolean>();
   @Output() _selectedTask = new EventEmitter<ITask>();
-  cdr = inject(ChangeDetectorRef);
-  updateTask: boolean = false;
   
-  constructor(private tasksCrud:TasksCrudService){}
+  constructor(){}
   
   ngOnInit(): void {
     this.tasks$ = this.tasksCrud.getCollectionData()
@@ -72,6 +82,7 @@ export class TaskTableComponent implements OnInit{
   onClickRow(task: ITask, update: boolean = false): Observable<ITask> | void{
     this.updateTask = update
     this.selectedTask.set(task)
+    this.taskService.setTask(task)
     this._selectedTask.emit(task)
     
     if (update) {

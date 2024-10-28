@@ -10,6 +10,7 @@
 			<mat-icon>{{progressPercentage === 100 ? 'done':'add'}}</mat-icon>
 		</button>
 	</div>
+	<p class="progress-indicator">	{{ progressIndicator }} </p>
 	
 	<app-task-details [task]="task" (taskProgressChange)="handleTaskProgressChange($event)"></app-task-details>
 	<button mat-flat-button class="erase-btn">

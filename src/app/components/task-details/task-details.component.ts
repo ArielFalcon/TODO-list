@@ -2,7 +2,8 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output,
 import {
 	MatAccordion,
 	MatExpansionPanel,
-	MatExpansionPanelDescription, MatExpansionPanelHeader,
+	MatExpansionPanelDescription,
+	MatExpansionPanelHeader,
 	MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
@@ -30,8 +31,7 @@ import {DateFormatPipe} from "@/pipes/date-format.pipe";
 })
 export class TaskDetailsComponent implements OnInit {
 	readonly panelOpenState = signal(false);
-	progressPercentage = 40; //TODO remove when task is implemented
-	previousProgressPercentage = 0;
+  @Input()  	previousProgressPercentage = 0;
 	taskPosibleStates !: EState[]
 	@Input() task!: ITaskDTO;
 	@Output() taskProgressChange = new EventEmitter<number>();
@@ -41,15 +41,19 @@ export class TaskDetailsComponent implements OnInit {
 	}
 	
 	ngOnInit() {
-		this.previousProgressPercentage = this.progressPercentage;
+		this.previousProgressPercentage = this.task.percentage;
 		console.log('Task:', this.task);
 	}
 	
 	onStateChange(state: EState) {
 		if (state === EState.DONE) {
 			this.taskProgressChange.emit(100);
-		} else {
+		} else if (state === EState.PENDANT) {
+			this.taskProgressChange.emit(0);
+		}
+		else {
 			this.taskProgressChange.emit(this.previousProgressPercentage);
 		}
 	}
+	
 }

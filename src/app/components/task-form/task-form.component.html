@@ -16,6 +16,10 @@
 			</mat-select>
 		</mat-form-field>
 		<div class="form-input">
+			<p>Objetivo</p>
+			<input type="number" id="goal-input" formControlName="goal">
+		</div>
+		<div class="form-input">
 			<p>Prioridad</p>
 			<mat-button-toggle-group formControlName="priority">
 				@for (priority of [1, 2, 3, 4, 5]; track $index) {

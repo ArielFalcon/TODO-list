@@ -1,12 +1,13 @@
 export interface ITaskDTO {
 	title: string;
-	description: string | null;
-	priority: number | null;
-	deadline: string | null;
+	description?: string;
+	priority?: number;
+	deadline: string;
 	state: EState | null;
 	goal: number | null;
 	goalMetric: EGoalMetrics | null;
 	frequency: EFrequency | null;
+	percentage: number;
 }
 
 export interface ITask extends ITaskDTO {

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, Input, OnInit, signal} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatButton, MatMiniFabButton} from "@angular/material/button";
@@ -31,28 +26,27 @@ import {TaskDetailsComponent} from "@/components/task-details/task-details.compo
   styleUrls: ['./task-progress.component.scss']
 })
 export class TaskProgressComponent implements OnInit{
-  previousProgressPercentage = 0;
-  progressPercentage = 40;
-  maxProgress = 100;
-  progressStep = 20;
   @Input() task!: ITaskDTO;
-  
-  constructor() {
-  }
+  private readonly maxProgress = 100;
+  _progressPercentage = signal(this.task.percentage);
+  previousProgressPercentage = signal(0);
+  percentageStep = computed(() => Math.round(this.task.goal ? 100 / this.task.goal : 100));
+  progressIndicator = computed(() => `${Math.round(this.progressPercentage / this.percentageStep())}/${this.task.goal}`);
   
   ngOnInit() {
-    this.previousProgressPercentage = this.progressPercentage;
+    this.previousProgressPercentage.set(this.task.percentage);
   }
   
-  increment() {
-    if (this.progressPercentage < this.maxProgress) {
-      this.progressPercentage += this.progressStep;
+  get progressPercentage() {
+    return this._progressPercentage();
+  }
+  
+  set progressPercentage(value: number) {
+    if(value >= 0 && value <= 100) {
+      this.task.percentage = value;
     }
-  }
-  
-  decrement() {
-    if (this.progressPercentage > 0) {
-      this.progressPercentage -= this.progressStep;
+    if (value >= 100) {
+      this.task.percentage = 100;
     }
   }
   
@@ -75,7 +69,21 @@ export class TaskProgressComponent implements OnInit{
     }
   }
   
+  increment() {
+    if (this.progressPercentage < this.maxProgress) {
+      this.progressPercentage += this.percentageStep();
+    }
+  }
+  
+  decrement() {
+    if (this.progressPercentage > 0) {
+      this.progressPercentage -= this.percentageStep();
+    }
+  }
+  
   handleTaskProgressChange(progress: number) {
+    console.log(progress)
     this.progressPercentage = progress;
+
   }
 }

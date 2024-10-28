@@ -1,16 +1,16 @@
 @import "shared";
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   place-items: center;
+  gap: 1vh;
   color: $white;
-  margin: 5vh 0;
   text-align: center;
   user-select: none;
 
   .progress {
-    margin: 0 auto;
     width: clamp(380px, 20vw, 500px);
     position: relative;
     height: 60px;
@@ -118,6 +118,18 @@
         }
       }
     }
+  }
+
+
+  .progress-indicator {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: 100%;
+    margin: 0;
+    color: $white;
+    transition: all 0.4s linear;
+    font-size: 0.8em;
   }
 
   .erase-btn {

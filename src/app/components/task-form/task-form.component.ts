@@ -71,22 +71,24 @@ export class TaskFormComponent implements OnInit, OnDestroy{
 			priority: this.taskForm.get('priority')?.value,
 			deadline: this.taskForm.get('deadline')?.value,
 			state: this.taskForm.get('state')?.value,
-			goal: 0,
+			goal: this.taskForm.get('goal')?.value,
 			goalMetric: null,
 			frequency: null, /*TODO recibir datos*/
+			percentage: 0,
 		}
 	}
 	
   ngOnInit(): void {
 		if (this.task) {
 			const deadline = this.task.deadline ? DateTime.fromISO(this.task.deadline) : '';
-			console.log('tarea input: ',this.task);
+			
 			this.taskForm = this.formBuilder.group({
 				title: [this.task.title, [Validators.required]],
 				description: [this.task.description],
 				priority: [this.task.priority],
 				deadline: [deadline, [Validators.required]],
 				state: [this.task.state, [Validators.required]],
+				goal: [this.task.goal],
 			})
 		} else {
 			this.taskForm = this.formBuilder.group({
@@ -95,6 +97,7 @@ export class TaskFormComponent implements OnInit, OnDestroy{
 				priority: [1],
 				deadline: [null, [Validators.required]],
 				state: [EState.PENDANT, [Validators.required]],
+				goal: [0],
 			})
 		}
   }
@@ -110,7 +113,7 @@ export class TaskFormComponent implements OnInit, OnDestroy{
 		if (this.task) {
 			res =this.updateTask();
 		} else {
-		res =	this.addTask();
+			res =	this.addTask();
 		}
 		
 		res?.pipe(takeUntil(this.destroy$))
