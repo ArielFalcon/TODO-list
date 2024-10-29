@@ -53,7 +53,7 @@ Para ejecutar la aplicación localmente, sigue estos pasos:
    > **Importante**: Requiere Node v22
 
 5. Abre tu navegador y accede a `http://localhost:4200`
-> **Importante**: Verifica el puerto, puede variar.
+    > **Importante**: Verifica el puerto, puede variar.
 
 
 ## Contribuciones
