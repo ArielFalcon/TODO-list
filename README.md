@@ -46,12 +46,14 @@ Para ejecutar la aplicación localmente, sigue estos pasos:
    - Crea un proyecto en [Firebase Console](https://console.firebase.google.com/).
    - Añade tu configuración de Firebase en el archivo `src/environments/environment.ts`.
 
-4. **Ejecuta la aplicación:** #Requiere Node v22
+4. **Ejecuta la aplicación:**
    ```bash
    ng serve
    ```
+   > **Importante**: Requiere Node v22
 
-5. Abre tu navegador y accede a `http://localhost:4200`# Verifica el puerto, puede variar.
+5. Abre tu navegador y accede a `http://localhost:4200`
+> **Importante**: Verifica el puerto, puede variar.
 
 
 ## Contribuciones
