@@ -2,7 +2,7 @@
 
 ## Descripción
 
-La aplicación **TODO-list** es una herramienta diseñada para gestionar tareas y recordatorios de manera sencilla. Su principal objetivo es mostrar mis conocimientos y habilidades como desarrollador Frontend.
+La aplicación **TODO-list** es una herramienta diseñada para gestionar tareas y recordatorios de manera sencilla. Su principal objetivo es mostrar mis conocimientos y habilidades como desarrollador Frontend. La mayoria de sus componentes son creados desde cero, implementando lógicas complejas para integrar sus funcionalidades a la API de FormModels que provee Angular. Utilizo los últimos estandares de Angular: Standalone components, zoneless change detection, signals...
 
 ## Tecnologías Utilizadas
 
