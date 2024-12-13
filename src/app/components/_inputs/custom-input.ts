@@ -24,7 +24,7 @@ export class CustomInput implements ControlValueAccessor, AfterViewInit {
 	@ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
 	
 	ngAfterViewInit(): void {
-		// Ensure that the inputElement is defined
+		// Expects the inputElement to be defined
 		if (!this.inputElement) {
 			throw new Error('Input element not found. Ensure that the input has a template reference variable #inputElement');
 		}
