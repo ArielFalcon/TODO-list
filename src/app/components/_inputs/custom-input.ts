@@ -8,9 +8,10 @@ import {
 } from '@angular/core';
 
 /*
+  This class's implementation is necessary for binding and functionality to work correctly vith Angular native data-binding in custom inputs.
+  
   Base class for custom input components.
-  Ensure that the HTML template of every component that extends CustomInput includes the #inputElement.
-  This implementation is necessary for binding and functionality to work correctly.
+  Take care that the HTML template of every component that extends CustomInput includes the #inputElement.
  */
 @Directive()
 export class CustomInput implements ControlValueAccessor, AfterViewInit {
