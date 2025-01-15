@@ -6,10 +6,10 @@
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  border-radius:  32px;
+  border-radius: 32px;
   background: linear-gradient(180deg, $background-color, $background-color, $background-color, $secondary-color);
   box-shadow: 20px 20px 41px $background-color,
-  -20px -20px 41px $background-color;
+    -20px -20px 41px $background-color;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -24,7 +24,7 @@
     padding-top: 12px;
 
     .form-input {
-      width: 80%;
+      width: 90%;
 
       p {
         color: #fff;
@@ -61,7 +61,7 @@
     &:active {
       background: $darker-red;
       box-shadow: inset 11px 11px 22px $darker-red,
-      inset -11px -11px 22px $dark-red;
+        inset -11px -11px 22px $dark-red;
 
       .close-icon {
         color: $white;
