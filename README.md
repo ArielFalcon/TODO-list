@@ -18,7 +18,7 @@ La aplicación **TODO-list** es una herramienta diseñada para gestionar tareas 
   - [Node.js 22](https://nodejs.org/) - Un entorno de ejecución de JavaScript del lado del servidor.
   - [Firebase](https://firebase.google.com/) - Plataforma de Google que proporciona bases de datos en tiempo real, autenticación y hosting.
 
-## Características 
+## Características 📝
 
 - **Gestión de Tareas:** Visualizar, crear, editar y eliminar tareas.
 - **Interfaz Amigable:** Utiliza Angular Material para una experiencia de usuario atractiva.
